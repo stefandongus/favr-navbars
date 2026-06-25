@@ -1,0 +1,219 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – EuroOptica™ New York
+     Schwarzer Info-Stripe + weiße Hauptnav
+     Breakpoint: 1024px (Stripe weg, Hamburger)
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  #favr-burger-toggle { display: none; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; height: 100vh; background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 22px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+  }
+  .favr-drawer__head img { height: 32px; width: auto; }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s;
+  }
+  .favr-drawer__close:hover { background: #f5f5f5; }
+  .favr-drawer__close svg {
+    width: 20px; height: 20px; fill: none; stroke: #1a1a1a;
+    stroke-width: 2; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #1a1a1a; text-decoration: none;
+    font-size: 15px; padding: 13px 22px; border-bottom: 1px solid #f0f0f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: #f8f8f8; }
+  .favr-drawer__footer {
+    padding: 20px 22px; font-size: 13px; color: #666;
+    line-height: 1.75; border-top: 1px solid #f0f0f0; margin-top: auto;
+  }
+  .favr-drawer__footer strong { color: #1a1a1a; display: block; margin-bottom: 4px; }
+  .favr-drawer__footer a { color: #2a9d8f; text-decoration: none; }
+
+  /* Info Stripe */
+  .favr-stripe {
+    background: #1a1a1a; width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-stripe__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto; padding: 8px 32px;
+  }
+  .favr-stripe__info {
+    font-size: 11px; color: #ffffff; letter-spacing: 0.02em;
+  }
+  .favr-stripe__info a {
+    color: #ffffff; text-decoration: none; transition: opacity 0.12s;
+  }
+  .favr-stripe__info a:hover { opacity: 0.75; }
+  .favr-stripe__sep { color: rgba(255,255,255,0.4); margin: 0 8px; }
+  .favr-stripe__book {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: #ffffff; text-decoration: none;
+    letter-spacing: 0.02em; transition: opacity 0.12s; white-space: nowrap;
+  }
+  .favr-stripe__book:hover { opacity: 0.75; }
+  .favr-stripe__book svg {
+    width: 14px; height: 14px; fill: none;
+    stroke: #ffffff; stroke-width: 1.5; stroke-linecap: round;
+  }
+
+  /* Main Header */
+  .favr-header {
+    display: block; width: 100%; background: #ffffff;
+    border-bottom: 1px solid #e8e8e8;
+    position: sticky; top: 0; z-index: 1000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-header__inner {
+    display: flex; flex-direction: row; align-items: center;
+    width: 100%; height: 144px;
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 32px; gap: 0;
+  }
+  .favr-header__logo {
+    display: flex; align-items: center;
+    text-decoration: none; flex: 0 0 auto; margin-right: 48px;
+  }
+  .favr-header__logo img { height: 56px; width: auto; display: block; }
+
+  .favr-header__nav {
+    display: flex; align-items: center;
+    flex: 1 1 auto; gap: 0; justify-content: center;
+  }
+  .favr-header__nav a {
+    color: #2d2d3a; text-decoration: none;
+    font-size: 16px; font-weight: 400;
+    padding: 0 20px; white-space: nowrap; transition: color 0.15s;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .favr-header__nav a:hover { color: #2a9d8f; }
+
+  .favr-tryon-icon svg {
+    width: 18px; height: 10px; fill: none;
+    stroke: #2a9d8f; stroke-width: 1.8; stroke-linecap: round;
+  }
+
+  .favr-header__burger {
+    display: none; align-items: center; justify-content: center;
+    cursor: pointer; width: 36px; height: 36px;
+    flex-shrink: 0; background: none; border: none; padding: 0;
+    margin-left: auto;
+  }
+  .favr-header__burger svg {
+    width: 22px; height: 22px; fill: none;
+    stroke: #1a1a1a; stroke-width: 1.8; stroke-linecap: round;
+  }
+
+  /* Mobile: < 1024px */
+  @media (max-width: 1024px) {
+    .favr-stripe { display: none; }
+    .favr-header__inner { height: 144px; padding: 0 20px; }
+    .favr-header__logo img { height: 56px; }
+    .favr-header__nav { display: none; }
+    .favr-header__burger { display: flex; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" aria-hidden="true">
+<label class="favr-overlay" for="favr-burger-toggle" aria-hidden="true"></label>
+
+<div class="favr-drawer" role="dialog" aria-label="Navigation">
+  <div class="favr-drawer__head">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgoAAABqCAYAAADdqnkmAAAAAXNSR0IArs4c6QAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAAgqgAwAEAAAAAQAAAGoAAAAAzbRNPQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAFjNJREFUeAHtnc/uZUURxy8G3kAXRjeEGASDIpow72FCgC0JcSU+hu4YV4YHgAcQFiSGqCsmQ2DhGtkR32Kc72+mMn3L6nP6T3V3nXO/ncycf/2n6lPV1XXOPff+nnv0uFxYSIAESIAESIAESMAg8APjHE+RAAmQAAmQAAmQwB0BJgp0BBIgARIgARIggSwBJgpZNLxAAiRAAiRAAiTARIE+QAIkQAIkQAIkkCXARCGLhhdIgARIgARIgASYKNAHSIAESIAESIAEsgSYKGTR8AIJkAAJkAAJkAATBfoACZAACZAACZBAlgAThSwaXiABEiABEiABEmCiQB8gARIgARIgARLIEmCikEXDCyRAAiRAAiRAAkwU6AMkQAIkQAIkQAJZAkwUsmh4gQRIgARIgARIgIkCfYAESIAESIAESCBL4PnsFV4gARIgARIgARKoInD/Lx9dPrz/190233379V2dd959//Llg68u99787eWTjz8y26V9Sjuz4qCTfKIwCCy7JQESIAESIIFSAkgWkBDokiYJ+tqsYyYKs0hzHBIgARIggdMT+OAP719w1y//8KQABU8L5FzuqQCeRCBhSMuXX14fp9dm7TNRmEWa45AACZAACZBAhoAkFPfvP3uqgKcJ8rFEptmU00wUpmDmICRAAiRAAiSQJ/DBB+/fvacgH0FgK+864NrKwkRhJX2OTQIkQAIkQAJPCUhCgARBniz88YPf3yUQKyExUVhJn2OTAAmQAAmQwFMC+PgBiQEKnihgH+88rC5MFFZbgOOTAAmQAAmQwFMCSAzkfYUISQLE4u8o0D1JgARIgARIIBCBu/cVHjz5tkQEsZgoRLACZSABEjgUgRdfeuNKXnz1Te4Cry7wgAQaCMCXIvkTP3poMCKbkAAJkAAJkMCtEOAThVuxNPWcTgAvIz148ORnWtMfTbl378kjxTfffCPUXcN0QByQBEjgEASee/S4HEJSCkkCByFw9z3oxz+agm1JifJmc4msrPOEAD96oCfcEgF+9HBL1qauQwngV9SwgMgfeSkdDN+ZRjvrd95L+2A9EiABEhhFgInCKLLs92YI4MkBkgP5FbVWxdG+NsloHYvtSIAESKCUABOFUlKsRwIGAUkSSj5mKHmLWfrj0wUDNk+RAAksIcCXGZdg56BnICCLek4XJAby++26jiQCuacQOM+XHTU1HpMACawgcNqXGeUOr+Quzhu8jC39rpBBxtbbyLJpWUcfg0WrbdAWHxNYpfblRCQNuYSh9fv5YudW/Sy9as+JDNLOQxbp06MvkWtrK+PpOtr2sDkSu97Sotf33//38u1/vrsa+ucv/+zyox/98OrcrANh1qLLLBllHJFVjo8gs8g6c3v4REEMjT+gIfs5gHACfDVt5M9iQgYdRHJ/ezwn58jz+m3t0kXN0qt2EUMf+Lpg+lVBsZlMUPnqoKeNZAz5IytyrDmLf+B8yfj6fQK0zz1B0GPpY8ikfRj9gfFWEV32dEMfol+Jbltjll5r9TX036KX9xMYyKDncqnuLfVK7G31+/DhN5e33n7v6tJnn35yefWVl6/OjTgQv0XfYjM9DvRCGTG39VhbxyKfnme5NoiNKLPmS06OCOcPmyjgLgwLjhi/BWbpIlnTN+TRweWWEwXwKJ2YmnPvwtYzNmQpCRTyNKA1yGudJfnY881e3XrZarmt45ZEoVcvyLHHzpLVOgdZ9Fy26nmda/Wh2YlCJBuVsPeQd8Z8KdFlVZ3DvaMggdkDGB734p9XYPGQ6Sx9eCRymOD4V5vRe/mIfByAhDT3JEpkk22v/fAEATojMFnFI+ihX2Ebxf+9bAbdOK9Bwb94+R4km2EjT3llvghVr/ku/UXfHuZbDzAUsnsJ3p5g0Se/x+5DNLUT9nuL3NWX9JOOXVK/tA76hY/cJT+GTt5Bw0oSRDd54lAqe0m9lf4venFel1hqXR343ZF8b6S8EgvWWWP+yId4olBytyHBFZ8R65L+jC4CU65IsPIO/Lnxzna+xE7QWWwln1kKB+ujpFJb1I59J8fTn1KWdya2fAP1xT9mP4Eq0S1lmr5UJ76fyo99q4h+pcytPmrO9eiFcUQ3y29SOVr1AtPcOyJYiNICn0i5p9dG77/++muXf/7jb1fD/PQnP746bj2QRG6vPVhhPqcMxD5oO8pGWq4SeWWupGsFzsn8F7nFb/QYOMY16NT6TpLVZ+Rz4d9R2AomMK4YW4xfAnurT7TvWQgsR72FdxT2mIqtSuwEhjJZSxat0rFh273xZeytINHrI2hfWkp129NLxivRr8f/ZRxst95R8NYL4+316aWXpVvti73oI3rZ41kzp0XXvT5Rr5XlXt8t8s6cL8Io4jZ0orD1qKvVmVIjbDkWnCp3N5H2offhWPpu4+yJwhZHz+CsWeN4y0daAkM6xpZeqDdat63xPcbe6r/V/1N+uURha9wj6AUdtW4e8Shlt3p/y0a98wq67fVfG3v3+vO4898a42z21/4X9h0FGAWLri5wUiy82PYW3K2iLwQnXTA2ZGDZJpCbPLLQlDwR2B4hfzXnI2iBids7ebf8A2PgqcMoH5nBdUu/Uf4fQS+dyMOWLM8I5GyEGh7zCv3s+V6NjeCruSeAXvKKzNZagWtbNyy4fvQS8h2FnKN63G1YBpPFTDubHMt1q+0tn8t97XGUnVLWOR/xuNtJx8G+2F/8Ib2Oc97f38/pNoprTj/RV66nerfsS3+67Wy9JAny0kvrM/v44VffXL7++t9Xw96795vLr375i6tzJQe5RXfEvII8YgPtG5ADiy8W+r1iJRUj5cV8t8ZEPLz3cf8N7J6+K66He6IwO0gKdDgsApYucGA4Lcv/E7C4jAr66eg5H5GnGNh6F/hHLmhZQaNnfB000ddorqv8/6x69di/uu2jy+VPf/7w6t8LL7TdA2Kx02XkvMJYOd/TLztruXCMWKDLaHnRv/VUW5IbLc8ZjsMlChbU0cFExsw5rDV5pA23zwjMspO1kEpweCaN/97WGFbAapHA6mcW19n+f1a9WuweoQ18z0r+cwmyp8za90p8A/JasWCGvNBdXqRPOYCfxTCtc8T9UImCZXgEZzjRrIKxMGZazmr8VMfe/ZKJ3TsG2lsLKc7PCg7wDeiqi8eTp1vy/xXzWtsN8zrnT9q+t3C8ctEFX0kWMJdLYr4lr7bxSLvBh624c8Yby1CJgmV4K2sbafw7hzV+i+GMxvfkWDKxPcazfGRmcLjzDyOZxPkRPlLy+NWDa9qHNee8dVuil3HDYflTyuJW9q2ECfNK3zSN5mHdqFlj5uSdFYdEJvDRjM54YxkmUcgZXhtBDDRyizH14nNG43sx1Ky8+tX95HxkdnCAXNZi2uMj0E0vWuC6QrfR/r9KL9jN8lXY7daL9j3wWOF7pXaIJK8VC7wT61Iuo+qFSRQsBVc6qjX22YxvMW85Z7Fq6edIbazF1Fv+lVytsb38P/31Pm9me/1BL33z4aXX3thRr+cS8KjyWnJZCaBVb8Q5+JP2qZ6bhhEy9vYZJlHQGeJKwwtUy/hyjdsnBGbaSfsI7GMtaLNsYy14rYuO1m0m1xyvEf6PPnW/ufFnnT9bUPfgtnJe7clvJTar5bWeKuzpcaTrIRIFy/ARIFrG52PKa8tYi+V1DZ8jy0dWfM6damMtei3+0dImlWPU/gj/X20zsLL0GsXwCP1GTFK3uMnfZpE6ERJPKxa03jSIXpG2IRIFC8jqDBEyWQ4of4PAkvkWz1mMZnGYlaRs6WMtfLULv+VTUf2/N/hF0Uv7ba9eWz4S+Vqtr0bQRctszcGIckaQqVWGkImCnsStynm007LobNZjjKP2MfPxuMVd22YFRytZsRb+Gtki6CXyRpJFZOJ2LIEIyVyNhtYcrGnvVffMT6rafr7Li+zTfqxFwHrU7DxsUXc6ey1qxErDCZxpAbP8fzjABQNEshnuQjm3n/2p7gXu0DTk0WwGeSP5fRP0x41CJApaeMA9mkNoHXjsSyCqP1hBAAt/z11ZpEepekGNaodebzurXr1cjtDemoNHkPtIMob46OFIk/RIso52xJWP/CItpr2cb8WnItlspe/2+svI9tEX3d6P9W6ZXY/uIRKFHgWO0PZWFoKZtjjT43odnM+kW+oTkfSKvOCkzLh/TSBygmfF+bP4WYhEQQfKa9fgkRcBy5EjT7xU7yP5SKQ755Shx/6R7OChb2kfZ1kQrBhRymBVvSPKvIpV67gh31FAMLL+2EarkjPbMZDOpL1+rLMHqUhPAUZau3beon5qe3DqeS9lpG5bfR/lRmFLhyjXzpIsWjxDPFHQgqUTUF874nEUB7LkqA2QUfhH8RGLaS0j/QQiim6WHlpWq07uXCS9biUBytli63wkO2k5jxqvtB5HOw6RKFjfP43srHtG1s7MoLRHbP+6tUBF9ZHauzSrfhTdvOXw7m/fc+waWg7Lv+yW9lndn13rGGej//iUjq9R5NW/cHkMa5dJGSJRKBP1OLV00EEQiRBItCPP/MGkXutZi2mEAKGZQk8dyPZ0t+pH0M36LRPLDnv6pdfPotdZbm7ge5b/pTaLvh8lvkbn1CNfiETBctYIAaUVbG8wbR13q50V9LfqR7tm+cjq5Mti2pp8RQzW1pOwXjlX2yzn17V6Wf541Jilk57oC6+WFzb1+Agw5xsl561YUNLuKHVCJAqAFfUuvMWQVhB55933W7pya2Pd+R7x5SsNZOUEtRZSLV/psQ5+q4M1uOpFvTUJ0gxW2gxj67ngpddqm2nOPceRkx4rvmqb9uje0nb1+C0y17QJkyhYd+GRnXUPsk58UH9VgLTG9QqOexw8r+vFFH1jguoFzXPMXF9gao3rmXytTC6twGfN0RyfrfNW31v1o16z/PGIMctaeKMnPdHja1SfbZUrTKKQc1ZrkWtVdmY7a8FYtahZgdmSbyaflrEsH0E/K4KzxbQn+YJuVvsV/m+NCdkgo1dZkQRBL2036NU6Fyx/xAJr8fPiNqqfoyU9sJn2xxXxFfbWPjXKRiv7DZMoAIL12wmzje850c3Af/+jqfa2gpYl11ShOgazApqnzUpEs5giaLUuODKm1X6F/1uBz5JN5G7ZzrZZLqD36mX542ybtfDXbY6Y9FjsZ980rEh4te1mHIdKFKCwtYjBGJjoowvGwFiY6NZiUDs+gpDOemcGSOgwI+jXcumpbwU09DcrOOeYWo9CW/Rc6f+Q1wp8lkwtuuk2s2w2Uq+cP1octf7Rjq2F1ysWlugKZi++9EZx7LXYSwwvGa+3zhFt3KpzuETBWlyh3OhMUTsYJkiN0+YMsGry5Ra0UUE/p/+I83jypBMwjIOJ65Hg5WTeYtp7Zypj5vwfusFHRxXt/zIOOHvpJn2m29E2m6HXlj+OtFnK0WMftrbiw4xkIfXvmvGs+ArmI+MAWKfyerCP3ke4RAHArI8gYHyPhdsyyJ1jZT4S6H2Ba2vywdlGFPSLyaYLgsDIoK/HG3lsBQiMVxNkauTLMR2xkG4tPCMCIPw/F/isuVjDLa0L/wMvXUbZbJZe0MfyRxl/hM00Q6/jXKI620YYD/z2CvzJ8lG0x3pR0sfeGOl19Jfr15IjbXvk/ZCJAoDmoHs7LCbxVpC0AlutwTH5rExdnM4rkKC/nC5nShLAPxcgcE18xIOr2Ahbq+T81Kpbc85aeNBedKvpa6uu+L9Vx/JZq17NOfCy5tTR9SrxxxpOK+vu2Sg3F2plFt+z+sslldYYYJ/zVcRDjziAcUVeS4Yaea320c+FTRS2jI+g0vt0Ac4JJ0JfVslNFqtuyblcsoC2EiRbHVp0ySUJYHmWJwkp6z0fEa5WIEr7sfZTptZ1jD0qScB4W/17+D98DXMo5/8IfKN8Jje3jq7Xnj/2xizLD0ed27JR7+Irc8vT9/biayt7yLpyroyyb22/zz16XGobzawvTrU1pmSTe4HtzuiPP2LAdqvkJslWm9JrcLrcBJE+oA8+8kDgyRXRBde39PEK+BgDASItIzml4+ztW7JZbcRPNNuUH96FSY+tfrYWcat+zznIsieT6BXN/xGc06J9MZfYShtwxkui2l5yHVux1R4j1J3lr5BJzxWMn5YS3dL6W/sPH35zeevt966qfPbpJ5dXX3n56lzLwV68Ej28fE/7SK3Me/KiP5FZPlbGsRTxJxy3+NSez8s4R9uGTxQE6F5QkXrYpobHcWp8HOcK2iGYjC4lzpzKkOpTqgva9066VAYr+M0KvKkcW/s1PrLVz9Y1T6Zb4+hrM3zG2/9LgmarXjXzwFsvbZvccYtuLfFnZKIA3Vr0ECaldoKN8HFbGuukj9qtFatq+9irn/OpEp/f6zvi9ecjCmXJhAlU6rClzpmOM3PRQ/aNf6P08Zx0KaPo+zU+UqvLaqZyx7b3NEr0qp0DqxIg6IU7u5K7N+hWo9fRbCa2i7YV34NcJf5XYyP06e17sPt3335dHF8hQ02ZuVbUyDWybth3FCyl4bBwADiWR4FDoS/0if3ZZYQ+cOJbdGSx3ZmZeusGZuL/6HtVwdyDz0IWr7mNfiLMgxE2W2En6IF/XvaBDmL3Ub7nyV5kXbVWrLB5OuZhPnpIhZZ93JGjlGS50gZbGN3rMVfab+8+9MEfGqrJyEUX0atXhlx7yKQ/d40QiHPyyvkWHwFTlIg+Inph26Ib2onPiJ44N6L0PIaFbjXzWnSJbjPMI/ylQ0s36IA5VVtGf/RgybOlh1Vfzs3yPRkv3dbK3OJTPT6fyhpt/9CJQgpTnEDOyV/2k1/Ms15ckboRt9H0gTx4PJyW6EE5lRX70AEl/ZO08BN5Ye7u4uP/JEDI8RG20fwFzLyCprbbmWwGTuKPWy9tol6ufP75F5e/f/Gvq8vvvvO7y69ff+3q3MgDSVpljDT+SuzFtUhzS/uVyNkjo+bQalPhGGV7mkQhClDKQQIk8ISAV6JAniRAAmsJHOodhbWoODoJkAAJkAAJ3B4BJgq3Z3NqTAIkQAIkQALFBJgoFKNiRRIgARIgARK4PQJMFG7P5tSYBEiABEiABIoJMFEoRsWKJEACJEACJHB7BJgo3J7NqTEJkAAJkAAJFBNgolCMihVJgARIgARI4PYIHOZvPdyeaagxCRybQMuvDB5bY0pPAuckwB9cOqddqRUJkAAJkAAJuBDgRw8uGNkJCZAACZAACZyTABOFc9qVWpEACZAACZCACwEmCi4Y2QkJkAAJkAAJnJMAE4Vz2pVakQAJkAAJkIALASYKLhjZCQmQAAmQAAmckwAThXPalVqRAAmQAAmQgAsBJgouGNkJCZAACZAACZyTABOFc9qVWpEACZAACZCACwEmCi4Y2QkJkAAJkAAJnJMAE4Vz2pVakQAJkAAJkIALASYKLhjZCQmQAAmQAAmckwAThXPalVqRAAmQAAmQgAsBJgouGNkJCZAACZAACZyTABOFc9qVWpEACZAACZCACwEmCi4Y2QkJkAAJkAAJnJMAE4Vz2pVakQAJkAAJkIALASYKLhjZCQmQAAmQAAmckwAThXPalVqRAAmQAAmQgAsBJgouGNkJCZAACZAACZyTwP8A8yttQ3yFVqcAAAAASUVORK5CYII=" alt="eurooptica">
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Main menu">
+    <a href="https://www.eurooptica.com/pages/eyewear-boutique">Eyewear Boutique</a>
+    <a href="https://www.eurooptica.com/pages/eye-doctor-services">Eye Doctor + Exams</a>
+    <a href="https://www.eurooptica.com/collections">Our Brands</a>
+    <a href="https://www.favrspecs.com/en/opticians/in/new-york/364/eurooptica-uws/14545/pro/eyeglasses/">Try-On</a>
+    <a href="https://www.eurooptica.com/pages/book-appointment">Book Your Eye Exam</a>
+  </nav>
+  <div class="favr-drawer__footer">
+    <strong>EuroOptica™</strong>
+    280 Columbus Ave, New York 10023<br>
+    <a href="tel:+12125017070">(212) 501-7070</a><br><br>
+    1249 3rd Ave, New York 10021<br>
+    <a href="tel:+12122573110">(212) 257-3110</a>
+  </div>
+</div>
+
+<div class="favr-stripe" role="complementary">
+  <div class="favr-stripe__inner">
+    <div class="favr-stripe__info">
+      <a href="https://www.eurooptica.com/pages/upper-west-side">280 Columbus Ave, New York 10023</a>
+      <span class="favr-stripe__sep">·</span>
+      <a href="tel:+12125017070">(212) 501-7070</a>
+      <span class="favr-stripe__sep">|</span>
+      <a href="https://www.eurooptica.com/pages/upper-east-side">1249 3rd Ave, New York 10021</a>
+      <span class="favr-stripe__sep">·</span>
+      <a href="tel:+12122573110">(212) 257-3110</a>
+    </div>
+    <a class="favr-stripe__book" href="https://www.eurooptica.com/pages/book-appointment">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      Book Your Eye Exam
+    </a>
+  </div>
+</div>
+
+<header class="favr-header" role="banner">
+  <div class="favr-header__inner">
+    <a class="favr-header__logo" href="https://www.eurooptica.com/" aria-label="EuroOptica – Home">
+      <img src="data:image/png;base64,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" alt="eurooptica™">
+    </a>
+    <nav class="favr-header__nav" aria-label="Main navigation">
+      <a href="https://www.eurooptica.com/pages/eyewear-boutique">Eyewear Boutique</a>
+      <a href="https://www.eurooptica.com/pages/eye-doctor-services">Eye Doctor + Exams</a>
+      <a href="https://www.eurooptica.com/collections">Our Brands</a>
+      <a href="https://www.favrspecs.com/en/opticians/in/new-york/364/eurooptica-uws/14545/pro/eyeglasses/">
+        Try-On
+        <span class="favr-tryon-icon">
+          <svg viewBox="0 0 32 14" aria-hidden="true">
+            <circle cx="9" cy="7" r="5.5"/>
+            <circle cx="23" cy="7" r="5.5"/>
+            <line x1="14.5" y1="7" x2="17.5" y2="7"/>
+          </svg>
+        </span>
+      </a>
+    </nav>
+    <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </label>
+  </div>
+</header>
