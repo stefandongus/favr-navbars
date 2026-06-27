@@ -133,10 +133,13 @@
     stroke-linecap: round; stroke-linejoin: round;
   }
 
+  @media (max-width: 1024px) {
+    .favr-header__right { display: none; }
+  }
   @media (max-width: 768px) {
     .favr-header__inner { height: 72px; padding: 0 32px; }
-    .favr-header__logo img { height: 26px; }
-    .favr-header__cta span { display: none; }
+    .favr-header__logo { position: absolute; left: 50%; transform: translateX(-50%); }
+    .favr-header__logo svg { height: 36px !important; }
   }
 </style>
 
