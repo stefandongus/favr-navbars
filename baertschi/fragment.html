@@ -1,0 +1,197 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Bärtschi Optik Bern
+     Dunkelblau #1e3750, Conduit ITC, SVG Logo
+     ============================================= */
+
+  @font-face {
+    font-family: 'Conduit ITC';
+    font-style: normal;
+    font-weight: 300;
+    src: url('https://www.baertschi.ch/_nuxt/fonts/996499d9-4799-4c1a-b2e9-01aecf944a67.a3f52b0.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Conduit ITC';
+    font-style: normal;
+    font-weight: 500;
+    src: url('https://www.baertschi.ch/_nuxt/fonts/e3ae65fb-ca65-4b6d-bf6b-46b0223bb000.09c8619.woff2') format('woff2');
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  #favr-burger-toggle { display: none; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { left: 0; }
+
+  .favr-drawer {
+    position: fixed; top: 0; left: -320px;
+    width: 300px; height: 100vh;
+    background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+    transition: left 0.28s ease;
+    font-family: 'Conduit ITC', 'Arial Narrow', Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 22px; border-bottom: 1px solid #e8eef3; flex-shrink: 0;
+  }
+  .favr-drawer__head img { height: 40px; width: auto; }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s;
+  }
+  .favr-drawer__close:hover { background: #e8eef3; }
+  .favr-drawer__close svg {
+    width: 20px; height: 20px; fill: none; stroke: #1e3750;
+    stroke-width: 1.5; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #1e3750; text-decoration: none;
+    font-size: 16px; font-weight: 300; padding: 13px 22px;
+    border-bottom: 1px solid #e8eef3;
+    font-family: 'Conduit ITC', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 0.05em;
+    transition: color 0.12s, background 0.12s;
+  }
+  .favr-drawer__nav a:hover { color: #1e3750; background: #f0f4f8; }
+  .favr-drawer__footer {
+    padding: 20px 22px; font-size: 13px; color: #8899aa;
+    line-height: 1.75; border-top: 1px solid #e8eef3; margin-top: auto;
+  }
+  .favr-drawer__footer a { color: #1e3750; text-decoration: none; }
+
+  /* Header */
+  .favr-header {
+    display: block; width: 100%;
+    background: #ffffff;
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid #e0e8ef;
+    font-family: 'Conduit ITC', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .favr-header__inner {
+    display: flex; flex-direction: row; align-items: center;
+    width: 100%; height: 140px; padding: 0 80px 0 120px;
+    position: relative;
+  }
+
+  /* MENÜ links */
+  .favr-header__menu-btn {
+    display: flex; align-items: center; gap: 12px;
+    flex: 0 0 auto; cursor: pointer;
+  }
+  .favr-header__menu-label {
+    color: #1e3750;
+    font-family: 'Conduit ITC', 'Arial Narrow', Arial, sans-serif;
+    font-size: 25px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    user-select: none;
+  }
+  .favr-header__hamburger-icon {
+    display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+  }
+  .favr-header__hamburger-icon span {
+    display: block; width: 24px; height: 1.5px;
+    background: #1e3750;
+  }
+
+  /* Logo absolut zentriert */
+  .favr-header__logo {
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    position: absolute;
+    left: 50%; transform: translateX(-50%) translateY(16px);
+  }
+  .favr-header__logo img {
+    height: 52px; width: auto; display: block;
+  }
+
+  /* Beratung rechts */
+  .favr-header__right {
+    display: flex; align-items: center; gap: 10px;
+    margin-left: auto; flex: 0 0 auto;
+  }
+  .favr-header__cta {
+    display: flex; align-items: center; gap: 8px;
+    color: #1e3750; text-decoration: underline;
+    text-underline-offset: 3px;
+    font-family: 'Conduit ITC', 'Arial Narrow', Arial, sans-serif;
+    font-size: 21px; font-weight: 300;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.15s;
+  }
+  .favr-header__cta:hover { color: #1e3750; }
+  .favr-header__cta svg {
+    width: 18px; height: 18px; fill: none;
+    stroke: #1e3750; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  @media (max-width: 768px) {
+    .favr-header__inner { height: 72px; padding: 0 32px; }
+    .favr-header__logo img { height: 26px; }
+    .favr-header__cta span { display: none; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" aria-hidden="true">
+<label class="favr-overlay" for="favr-burger-toggle" aria-hidden="true"></label>
+
+<div class="favr-drawer" role="dialog" aria-label="Navigation">
+  <div class="favr-drawer__head">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.6 34" fill="#1a1a1a" style="height:70px;width:auto;display:block;"><title>Bärtschi Logo</title><path d="M0 0h3.6v8h.1c.9-1.3 2.5-2.1 4.1-2.1 4.2 0 5.7 3.4 5.7 7.1 0 3.8-1.5 7.2-5.7 7.2-1.6.1-3.2-.7-4.2-2h-.1V20H0V0zm6.7 17.5c2.3 0 3-2.6 3-4.4 0-1.8-.6-4.4-3-4.4-2.3 0-3.2 2.4-3.2 4.4.1 1.9.9 4.4 3.2 4.4zM23.8 7c1.5-.7 3.1-1 4.8-1 4.2 0 5.9 1.7 5.9 5.8v1.8c0 1.4 0 2.4.1 3.4 0 1 .1 2 .2 3.1h-3.1c-.1-.7-.1-1.4-.2-2h-.1c-.9 1.5-2.5 2.4-4.2 2.4-2.4 0-4.8-1.5-4.8-4.1-.1-1.7.8-3.2 2.3-3.9 1.5-.6 3-.9 4.6-.8h2c0-2.2-1-3-3.1-3-1.5 0-3 .6-4.2 1.5L23.8 7zm.6-3.2V.7h3.1v3.1h-3.1zm3.5 13.9c1 0 1.9-.4 2.5-1.2.6-.8.8-1.8.7-2.8h-1.5c-1.6 0-4 .3-4 2.4.1 1.1 1.1 1.6 2.3 1.6zM33 .7v3.1h-3.1V.7H33zm11.9 5.6h3.2v3.1h.1c.3-1.9 1.9-3.3 3.8-3.4.4 0 .7 0 1.1.1v3.6c-.5-.2-1-.3-1.6-.3-2.9 0-2.9 3.6-2.9 5.6v5H45V6.3zm18.4 2.6h-2.6V6.3h2.6V3.5l3.6-1.1v3.9H70v2.6h-3.2v6.4c0 1.2.3 2.3 1.7 2.3.6 0 1.1-.1 1.6-.4l.1 2.8c-.9.2-1.7.3-2.6.3-2.8 0-4.3-1.7-4.3-4.4v-7zm24.2.2c-1-.4-2.1-.6-3.2-.6-1 0-2.1.3-2.1 1.5 0 2.2 6.2.8 6.2 5.8 0 3.2-2.8 4.5-5.7 4.5-1.4 0-2.7-.2-4-.6l.2-2.9c1.1.6 2.3.9 3.5.9.9 0 2.3-.3 2.3-1.7 0-2.7-6.2-.9-6.2-5.8 0-3 2.6-4.3 5.4-4.3 1.3 0 2.6.2 3.9.5l-.3 2.7zm19.4.1c-.8-.4-1.6-.5-2.4-.5-2.2 0-3.6 1.8-3.6 4.3s1.2 4.5 3.7 4.5c.9 0 1.9-.3 2.7-.6l.2 3c-1.2.3-2.4.5-3.6.5-4.5 0-6.8-3.1-6.8-7.2 0-4 2.3-7.1 6.6-7.1 1.2 0 2.3.1 3.5.5l-.3 2.6zm9.9-9.2h3.6v8.1h.1c1-1.4 2.6-2.2 4.3-2.2 3.2 0 4.7 2.3 4.7 5.4V20h-3.6v-7.3c0-1.7 0-3.9-2.3-3.9-2.6 0-3.1 2.8-3.1 4.6V20h-3.6l-.1-20zm23.2.3h3.6v3.4H140V.3zm0 6h3.6V20H140V6.3zM58.3 34H58c-.9.1-1.6-.6-1.7-1.4V29.2c0-.9.7-1.6 1.5-1.6h.5c.9-.1 1.6.6 1.7 1.4V32.4c0 .9-.7 1.6-1.5 1.6h-.2zm1-4.8c0-.6-.5-1-1-1H58c-.6 0-1 .4-1 1v3.2c0 .6.5 1.1 1 1.1h.3c.6 0 1.1-.5 1.1-1.1v-3.2zm8.6.2c0 .9-.7 1.6-1.5 1.7H65c-.1 0-.1 0-.1.1v2.7c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h1.9c.9-.1 1.7.6 1.7 1.5v.1zm-.6-.1c0-.6-.5-1.1-1.1-1H65c-.1 0-.1 0-.1.1v2c0 .1 0 .1.1.1h1.3c.6 0 1.1-.5 1.1-1-.1-.1-.1-.1-.1-.2zm7.4-1h-1.2c-.1 0-.1 0-.1.1v5.5c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-5.5c0-.1 0-.1-.1-.1h-1.2c-.1 0-.1 0-.1-.1v-.4c0-.1 0-.1.1-.1h3.3c.1 0 .1 0 .1.1l-.1.5c.1-.1.1 0 0 0zm4.6 5.6h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h.5c.1 0 .1 0 .1.1l-.1 6.1c.1 0 0 0 0 0zm8.5-.1s0 .1-.1.1H87l-1.8-3s0-.1-.1-.1H85l-.8 1v2c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h.5c.1 0 .1 0 .1.1v3c0 .1 0 .1.1.1 0 0 .1 0 .1-.1l2.4-3.1h.6c.1 0 .1 0 .1.1v.1l-1.9 2.3v.1l2.2 3.5z"/></svg>
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Schließen">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hauptmenü">
+    <a href="https://www.baertschi.ch/beratung">Beratung</a>
+    <a href="https://www.baertschi.ch/atelier">Atelierkunst</a>
+    <a href="https://www.baertschi.ch/sehtest">Sehtest</a>
+    <a href="https://www.baertschi.ch/kontaktlinsen">Kontaktlinsen</a>
+    <a href="https://www.baertschi.ch/das-baertschi-team">Das Bärtschi Team</a>
+    <a href="https://www.baertschi.ch/was-uns-ausmacht">Was uns ausmacht</a>
+    <a href="https://www.baertschi.ch/top-marken">Unsere Top-Marken</a>
+    <a href="https://www.baertschi.ch/unser-laden">Unser Laden</a>
+    <a href="https://www.baertschi.ch/standort">Standort</a>
+    <a href="https://www.baertschi.ch/beratung-buchen">Beratung buchen</a>
+  </nav>
+  <div class="favr-drawer__footer">
+    <a href="https://www.baertschi.ch/">www.baertschi.ch</a>
+  </div>
+</div>
+
+<header class="favr-header" role="banner">
+  <div class="favr-header__inner">
+
+    <label class="favr-header__menu-btn" for="favr-burger-toggle">
+      <span class="favr-header__menu-label">Menü</span>
+      <div class="favr-header__hamburger-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </label>
+
+    <a class="favr-header__logo" href="https://www.baertschi.ch/" aria-label="Bärtschi Optik">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.6 34" fill="#1a1a1a" style="height:70px;width:auto;display:block;"><title>Bärtschi Logo</title><path d="M0 0h3.6v8h.1c.9-1.3 2.5-2.1 4.1-2.1 4.2 0 5.7 3.4 5.7 7.1 0 3.8-1.5 7.2-5.7 7.2-1.6.1-3.2-.7-4.2-2h-.1V20H0V0zm6.7 17.5c2.3 0 3-2.6 3-4.4 0-1.8-.6-4.4-3-4.4-2.3 0-3.2 2.4-3.2 4.4.1 1.9.9 4.4 3.2 4.4zM23.8 7c1.5-.7 3.1-1 4.8-1 4.2 0 5.9 1.7 5.9 5.8v1.8c0 1.4 0 2.4.1 3.4 0 1 .1 2 .2 3.1h-3.1c-.1-.7-.1-1.4-.2-2h-.1c-.9 1.5-2.5 2.4-4.2 2.4-2.4 0-4.8-1.5-4.8-4.1-.1-1.7.8-3.2 2.3-3.9 1.5-.6 3-.9 4.6-.8h2c0-2.2-1-3-3.1-3-1.5 0-3 .6-4.2 1.5L23.8 7zm.6-3.2V.7h3.1v3.1h-3.1zm3.5 13.9c1 0 1.9-.4 2.5-1.2.6-.8.8-1.8.7-2.8h-1.5c-1.6 0-4 .3-4 2.4.1 1.1 1.1 1.6 2.3 1.6zM33 .7v3.1h-3.1V.7H33zm11.9 5.6h3.2v3.1h.1c.3-1.9 1.9-3.3 3.8-3.4.4 0 .7 0 1.1.1v3.6c-.5-.2-1-.3-1.6-.3-2.9 0-2.9 3.6-2.9 5.6v5H45V6.3zm18.4 2.6h-2.6V6.3h2.6V3.5l3.6-1.1v3.9H70v2.6h-3.2v6.4c0 1.2.3 2.3 1.7 2.3.6 0 1.1-.1 1.6-.4l.1 2.8c-.9.2-1.7.3-2.6.3-2.8 0-4.3-1.7-4.3-4.4v-7zm24.2.2c-1-.4-2.1-.6-3.2-.6-1 0-2.1.3-2.1 1.5 0 2.2 6.2.8 6.2 5.8 0 3.2-2.8 4.5-5.7 4.5-1.4 0-2.7-.2-4-.6l.2-2.9c1.1.6 2.3.9 3.5.9.9 0 2.3-.3 2.3-1.7 0-2.7-6.2-.9-6.2-5.8 0-3 2.6-4.3 5.4-4.3 1.3 0 2.6.2 3.9.5l-.3 2.7zm19.4.1c-.8-.4-1.6-.5-2.4-.5-2.2 0-3.6 1.8-3.6 4.3s1.2 4.5 3.7 4.5c.9 0 1.9-.3 2.7-.6l.2 3c-1.2.3-2.4.5-3.6.5-4.5 0-6.8-3.1-6.8-7.2 0-4 2.3-7.1 6.6-7.1 1.2 0 2.3.1 3.5.5l-.3 2.6zm9.9-9.2h3.6v8.1h.1c1-1.4 2.6-2.2 4.3-2.2 3.2 0 4.7 2.3 4.7 5.4V20h-3.6v-7.3c0-1.7 0-3.9-2.3-3.9-2.6 0-3.1 2.8-3.1 4.6V20h-3.6l-.1-20zm23.2.3h3.6v3.4H140V.3zm0 6h3.6V20H140V6.3zM58.3 34H58c-.9.1-1.6-.6-1.7-1.4V29.2c0-.9.7-1.6 1.5-1.6h.5c.9-.1 1.6.6 1.7 1.4V32.4c0 .9-.7 1.6-1.5 1.6h-.2zm1-4.8c0-.6-.5-1-1-1H58c-.6 0-1 .4-1 1v3.2c0 .6.5 1.1 1 1.1h.3c.6 0 1.1-.5 1.1-1.1v-3.2zm8.6.2c0 .9-.7 1.6-1.5 1.7H65c-.1 0-.1 0-.1.1v2.7c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h1.9c.9-.1 1.7.6 1.7 1.5v.1zm-.6-.1c0-.6-.5-1.1-1.1-1H65c-.1 0-.1 0-.1.1v2c0 .1 0 .1.1.1h1.3c.6 0 1.1-.5 1.1-1-.1-.1-.1-.1-.1-.2zm7.4-1h-1.2c-.1 0-.1 0-.1.1v5.5c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-5.5c0-.1 0-.1-.1-.1h-1.2c-.1 0-.1 0-.1-.1v-.4c0-.1 0-.1.1-.1h3.3c.1 0 .1 0 .1.1l-.1.5c.1-.1.1 0 0 0zm4.6 5.6h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h.5c.1 0 .1 0 .1.1l-.1 6.1c.1 0 0 0 0 0zm8.5-.1s0 .1-.1.1H87l-1.8-3s0-.1-.1-.1H85l-.8 1v2c0 .1 0 .1-.1.1h-.5c-.1 0-.1 0-.1-.1v-6c0-.1 0-.1.1-.1h.5c.1 0 .1 0 .1.1v3c0 .1 0 .1.1.1 0 0 .1 0 .1-.1l2.4-3.1h.6c.1 0 .1 0 .1.1v.1l-1.9 2.3v.1l2.2 3.5z"/></svg>
+    </a>
+
+    <div class="favr-header__right">
+      <a class="favr-header__cta" href="https://www.baertschi.ch/beratung-buchen">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>Beratung buchen</span>
+      </a>
+    </div>
+
+  </div>
+</header>
