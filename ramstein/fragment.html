@@ -1,0 +1,144 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Ramstein Optik Basel
+     Weiß, schwarz, nur Logo + Hamburger
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  #favr-burger-toggle { display: none; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; height: 100vh; background: #0a0f0a;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 22px; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0;
+  }
+  .favr-drawer__logo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.1;
+  }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s;
+  }
+  .favr-drawer__close:hover { background: #f5f5f5; }
+  .favr-drawer__close svg {
+    width: 20px; height: 20px; fill: none; stroke: #ffffff;
+    stroke-width: 2; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #ffffff; text-decoration: none;
+    font-size: 16px; font-weight: 400; padding: 14px 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: #1a1f1a; }
+  .favr-drawer__footer {
+    padding: 20px 22px; font-size: 13px; color: rgba(255,255,255,0.5);
+    line-height: 1.75; border-top: 1px solid rgba(255,255,255,0.1); margin-top: auto;
+  }
+  .favr-drawer__footer a { color: #ffffff; text-decoration: none; }
+
+  /* Header */
+  .favr-header {
+    display: block; width: 100%; background: #0a0f0a;
+    border-bottom: none;
+    position: sticky; top: 0; z-index: 1000;
+  }
+
+  .favr-header__inner {
+    display: flex; flex-direction: row; align-items: center;
+    justify-content: space-between;
+    width: 100%; height: 200px; padding: 0 40px; display: grid; grid-template-columns: 1fr auto; align-items: center;
+  }
+
+  /* Logo als Text */
+  .favr-header__logo {
+    display: flex; flex-direction: column;
+    text-decoration: none; flex: 0 0 auto; line-height: 1.15;
+  }
+  .favr-header__logo-top {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 80px; font-weight: 800; color: #ffffff;
+    letter-spacing: -0.02em;
+  }
+  .favr-header__logo-bottom {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 80px; font-weight: 800; color: #ffffff;
+    letter-spacing: -0.02em;
+  }
+
+  /* Hamburger */
+  .favr-header__burger {
+    display: flex; flex-direction: column; gap: 7px;
+    cursor: pointer; flex-shrink: 0;
+    align-self: start; margin-top: 32px;
+  }
+  .favr-header__burger span {
+    display: block; width: 36px; height: 6px; background: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    .favr-header__inner { height: 64px; padding: 0 20px; }
+    .favr-header__logo-top,
+    .favr-header__logo-bottom { font-size: 32px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" aria-hidden="true">
+<label class="favr-overlay" for="favr-burger-toggle" aria-hidden="true"></label>
+
+<div class="favr-drawer" role="dialog" aria-label="Navigation">
+  <div class="favr-drawer__head">
+    <div class="favr-drawer__logo">Ramstein<br>Optik</div>
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Schließen">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hauptmenü">
+    <a class="favr-drawer__main" href="https://www.ramstein-optik.ch/de/ueber-uns">Über uns</a>
+    <a class="favr-drawer__main" href="https://www.ramstein-optik.ch/de/lookbook-388/ramstein-horn">Lookbook</a>
+    <a class="favr-drawer__main favr-drawer__gold" href="https://www.ramstein-optik.ch/de/shop">Shop</a>
+    <div class="favr-drawer__divider"></div>
+    <a class="favr-drawer__secondary" href="https://www.ramstein-optik.ch/en/home">English</a>
+    <a class="favr-drawer__secondary" href="https://www.ramstein-optik.ch/de/oeffnungszeiten">Öffnungszeiten</a>
+    <a class="favr-drawer__secondary" href="https://www.ramstein-optik.ch/de/kontakt">Kontakt</a>
+    <a class="favr-drawer__secondary" href="https://www.ramstein-optik.ch/de/impressum">Impressum</a>
+  </nav>
+  <div class="favr-drawer__footer">
+    Sattelgasse 4, 4051 Basel<br>
+    <a href="tel:+41612619090">+41 61 261 90 90</a>
+  </div>
+</div>
+
+<header class="favr-header" role="banner">
+  <div class="favr-header__inner">
+
+    <a class="favr-header__logo" href="https://www.ramstein-optik.ch/" aria-label="Ramstein Optik">
+      <span class="favr-header__logo-top">Ramstein</span>
+      <span class="favr-header__logo-bottom">Optik</span>
+    </a>
+
+    <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+  </div>
+</header>
