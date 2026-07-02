@@ -1,0 +1,248 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Optik Gstaad
+     Weiß, zweistufige Nav, max-width 1300px
+     Ebene 1: Produkte | Dienstleistungen | Inside
+     Ebene 2: kontextabhängig, Produkte default
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  #favr-burger-toggle { display: none; }
+  #favr-toggle-dienst { display: none; }
+  #favr-toggle-inside { display: none; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; height: 100vh; background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+    transition: right 0.28s ease;
+    font-family: "Soehne", "Inter", system-ui, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 22px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+  }
+  .favr-drawer__head img { height: 32px; width: auto; }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s;
+  }
+  .favr-drawer__close:hover { background: #f5f5f5; }
+  .favr-drawer__close svg {
+    width: 20px; height: 20px; fill: none; stroke: #1a1a1a;
+    stroke-width: 2; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #1a1a1a; text-decoration: none;
+    font-size: 15px; font-weight: 700; padding: 12px 22px;
+    border-bottom: 1px solid #f5f5f5;
+    font-family: "Soehne", "Inter", system-ui, sans-serif;
+    transition: color 0.12s;
+  }
+  .favr-drawer__nav a:hover { color: #bc9135; }
+  .favr-drawer__sub-link {
+    font-size: 13px; font-weight: 400;
+    padding: 10px 22px 10px 36px !important;
+    color: #444 !important;
+  }
+  .favr-drawer__divider { height: 1px; background: #e8e8e8; margin: 4px 0; }
+
+  /* ── Header ── */
+  .favr-header {
+    display: block; width: 100%;
+    background: #ffffff;
+    position: sticky; top: 0; z-index: 1000;
+    font-family: "Soehne", "Inter", system-ui, sans-serif;
+  }
+
+  /* Ebene 1 */
+  .favr-header__top {
+    display: flex; flex-direction: row; align-items: center;
+    justify-content: space-between;
+    max-width: 1300px; margin: 0 auto;
+    height: 80px; padding: 0 40px;
+  }
+
+  .favr-header__logo {
+    display: flex; align-items: center;
+    text-decoration: none; flex: 0 0 auto;
+  }
+  .favr-header__logo img { height: 40px; width: auto; display: block; }
+
+  .favr-header__nav1 {
+    display: flex; align-items: center; gap: 0; flex: 0 0 auto;
+  }
+  .favr-header__nav1 a,
+  .favr-header__nav1 label {
+    color: #1a1a1a; text-decoration: none;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: 0.025em;
+    padding: 0 12px; white-space: nowrap;
+    transition: color 0.15s;
+    font-family: "Soehne", "Inter", system-ui, sans-serif;
+    cursor: pointer; display: inline-block;
+  }
+  .favr-header__nav1 a:hover,
+  .favr-header__nav1 label:hover { color: #bc9135; }
+
+  /* Ebene 2 */
+  .favr-header__sub { display: block; }
+  .favr-header__sub-inner {
+    display: flex; flex-direction: row; align-items: center;
+    max-width: 1300px; margin: 0 auto;
+    height: 24px; padding: 0 40px;
+    justify-content: flex-end;
+  }
+  .favr-header__nav2 {
+    display: none; align-items: center; gap: 0;
+  }
+  .favr-header__nav2 a {
+    color: #000000; text-decoration: none;
+    font-size: 14px; font-weight: 800;
+    letter-spacing: 0.025em;
+    padding: 0 14px; white-space: nowrap;
+    transition: color 0.15s;
+    font-family: "Soehne", "Inter", system-ui, sans-serif;
+  }
+  .favr-header__nav2 a:hover { color: #bc9135; }
+
+  /* Default: Produkte sub-nav sichtbar */
+  .favr-sub-produkte { display: flex; }
+
+  /* Dienstleistungen checkbox */
+  #favr-toggle-dienst:checked ~ .favr-header .favr-sub-dienst { display: flex; }
+  #favr-toggle-dienst:checked ~ .favr-header .favr-sub-produkte { display: none; }
+  #favr-toggle-dienst:checked ~ .favr-header .favr-sub-inside { display: none; }
+  #favr-toggle-dienst:checked ~ .favr-header .favr-dienst-label { color: #bc9135; }
+  #favr-toggle-dienst:checked ~ .favr-header a[href*="produkte.html"] { color: #1a1a1a; }
+
+  /* Inside checkbox */
+  #favr-toggle-inside:checked ~ .favr-header .favr-sub-inside { display: flex; }
+  #favr-toggle-inside:checked ~ .favr-header .favr-sub-produkte { display: none; }
+  #favr-toggle-inside:checked ~ .favr-header .favr-sub-dienst { display: none; }
+  #favr-toggle-inside:checked ~ .favr-header .favr-inside-label { color: #bc9135; }
+  #favr-toggle-inside:checked ~ .favr-header a[href*="produkte.html"] { color: #1a1a1a; }
+
+  /* When dienst OR inside is checked, dienst-label should not be orange if inside is checked */
+  #favr-toggle-inside:checked ~ .favr-header .favr-dienst-label { color: #1a1a1a; }
+  #favr-toggle-dienst:checked ~ .favr-header .favr-inside-label { color: #1a1a1a; }
+
+  /* Burger */
+  .favr-header__burger {
+    display: none; align-items: center; justify-content: center;
+    cursor: pointer; width: 36px; height: 36px;
+    flex-shrink: 0; background: none; border: none; padding: 0;
+  }
+  .favr-header__burger svg {
+    width: 24px; height: 24px; fill: none;
+    stroke: #1a1a1a; stroke-width: 1; stroke-linecap: round;
+  }
+
+  @media (max-width: 900px) {
+    .favr-header__top { height: 70px; padding: 0 20px; }
+    .favr-header__logo img { height: 34px; }
+    .favr-header__nav1 { display: none; }
+    .favr-header__sub { display: none; }
+    .favr-header__burger { display: flex; }
+    .favr-header__burger svg { width: 36px; height: 36px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" aria-hidden="true">
+<input type="checkbox" id="favr-toggle-dienst" aria-hidden="true">
+<input type="checkbox" id="favr-toggle-inside" aria-hidden="true">
+<label class="favr-overlay" for="favr-burger-toggle" aria-hidden="true"></label>
+
+<div class="favr-drawer" role="dialog" aria-label="Navigation">
+  <div class="favr-drawer__head">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzM1IiBoZWlnaHQ9IjQ5IiB2aWV3Qm94PSIwIDAgMzM1IDQ5IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNODEuNTg4IDIwLjYzNFYyOC40MzdIOTcuMzJWNDAuMjY4SDY1Ljg1NVYyOC40MzdINTguMDUyVjQ4LjA3MUgxMDUuMTIzVjIwLjYzNEg4MS41ODhaTTU4LjA1MiAxVjIwLjYzNEg2NS44NTVWOC44MDMwMUg5Ny4zMlYxNC43MTlIMTA1LjEyM1YxSDU4LjA1MloiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik0xIDFWNDguMDcxSDQ0LjE2OUg0OC4wNzFWMjguNDM3SDQwLjI2OFY0MC4yNjhIOC44MDMwNFY4LjgwMzAxSDQwLjI2OFYyMC42MzRINDguMDcxVjFIMVoiIGZpbGw9ImJsYWNrIi8+CjxtYXNrIGlkPSJtYXNrMF8xXzIiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjEiIHk9IjEiIHdpZHRoPSIzMzQiIGhlaWdodD0iNDgiPgo8cGF0aCBkPSJNMzM0LjU3MyAxSDFWNDguMDcxSDMzNC41NzNWMVoiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF8xXzIpIj4KPHBhdGggZD0iTTMzMS42NDggMzQuODUyVjE0LjQ1MkMzMzEuNjQ4IDEzLjM3OSAzMzEuMzAzIDEyLjUwNiAzMzAuNjI3IDExLjg0OEMzMjkuOTQ1IDExLjE4MyAzMjkuMDYxIDEwLjg0NiAzMjcuOTgzIDEwLjg0NkgzMjMuOTE1VjM4LjUwMUgzMjcuODFDMzI4Ljk1MyAzOC41MDEgMzI5Ljg3MyAzOC4xNzIgMzMwLjU4NCAzNy41MjFDMzMxLjI4OSAzNi44NzcgMzMxLjY0OCAzNS45ODMgMzMxLjY0OCAzNC44NTJaTTMzNC41NzMgMzUuMTQ1QzMzNC41NzMgMzYuODc3IDMzMy45OTggMzguMzAxIDMzMi44NTUgMzkuNDFDMzMxLjcxMiA0MC41MTkgMzMwLjI2OCA0MS4wNzcgMzI4LjUyOSA0MS4wNzdIMzIwLjk5VjguMjcxMDNIMzI4LjUyOUMzMzAuMjgzIDguMjcxMDMgMzMxLjcyNyA4LjgyODAxIDMzMi44NyA5LjkzNzAxQzMzNC4wMDUgMTEuMDQ3IDMzNC41NzMgMTIuNDcxIDMzNC41NzMgMTQuMjAyVjM1LjE0NVYzNS4xNDVaTTMxMi41OTYgMzEuMjAzTDMwOS43MDYgMTMuNDI5TDMwNi44MDMgMzEuMjAzSDMxMi41OTZaTTMxNy4wMzcgNDEuMDc3SDMxNC4xMzRMMzEyLjk2OSAzMy43NzlIMzA2LjQyMkwzMDUuMjY1IDQxLjA3N0gzMDIuNDQ4VjQwLjk5MUwzMDguMzE5IDguMTg1MDNIMzExLjIwMUwzMTcuMDM3IDQxLjA3N1Y0MS4wNzdaTTI5NS4zNTUgMzEuMjAzTDI5Mi40NjUgMTMuNDI5TDI4OS41NjIgMzEuMjAzSDI5NS4zNTVaTTI5OS43OTYgNDEuMDc3SDI5Ni44OTJMMjk1LjcyOCAzMy43NzlIMjg5LjE4MUwyODguMDI0IDQxLjA3N0gyODUuMjA3VjQwLjk5MUwyOTEuMDc4IDguMTg1MDNIMjkzLjk2TDI5OS43OTYgNDEuMDc3VjQxLjA3N1pNMjgzLjA3MiAxMC44NDZIMjc3Ljk3N1Y0MS4wNzdIMjc1LjA1MlYxMC44NDZIMjY5LjkxM1Y4LjI3MTAzSDI4My4wNzJWMTAuODQ2Wk0yNjYuNTQyIDM4Ljc1MkMyNjYuNTQyIDM5LjQzOSAyNjYuMzM0IDM5Ljk5NyAyNjUuOTAzIDQwLjQyNkMyNjUuNDcyIDQwLjg2MyAyNjQuOTE4IDQxLjA3NyAyNjQuMjI4IDQxLjA3N0gyNTUuOTM1QzI1NS4yNDUgNDEuMDc3IDI1NC42NzcgNDAuODYzIDI1NC4yMzkgNDAuNDI2QzI1My43OTMgMzkuOTk3IDI1My41NzcgMzkuNDM5IDI1My41NzcgMzguNzUyVjMwLjQzSDI1Ni41MDNWMzguNTAxSDI2My42MTdWMzAuNjgxTDI1NC41MTkgMTkuNzRDMjUzLjg5NCAxOC45ODIgMjUzLjU3NyAxOC4xNTIgMjUzLjU3NyAxNy4yNDNWMTAuNTk2QzI1My41NzcgOS45MTYwMSAyNTMuNzkzIDkuMzUxMDMgMjU0LjIzOSA4LjkyMjAzQzI1NC42NzcgOC40ODUwMyAyNTUuMjQ1IDguMjcxMDMgMjU1LjkzNSA4LjI3MTAzSDI2NC4yMjhDMjY0LjkxOCA4LjI3MTAzIDI2NS40NzIgOC40ODUwMyAyNjUuOTAzIDguOTIyMDNDMjY2LjMzNCA5LjM1MTAzIDI2Ni41NDIgOS45MTYwMSAyNjYuNTQyIDEwLjU5NlYxOC4yM0gyNjMuNjE3VjEwLjg0NkgyNTYuNTAzVjE3Ljc2NkwyNjUuNjM3IDI4LjcwNkMyNjYuMjQxIDI5LjQzNiAyNjYuNTQyIDMwLjI1MSAyNjYuNTQyIDMxLjE2VjM4Ljc1MlYzOC43NTJaTTI0OC40ODIgMzguNzUyQzI0OC40ODIgMzkuNDM5IDI0OC4yNTkgMzkuOTk3IDI0Ny44MjggNDAuNDI2QzI0Ny4zOSA0MC44NjMgMjQ2LjgyOSA0MS4wNzcgMjQ2LjE0NiA0MS4wNzdIMjM3LjQ4N0MyMzYuODAzIDQxLjA3NyAyMzYuMjQzIDQwLjg2MyAyMzUuODA0IDQwLjQyNkMyMzUuMzY3IDM5Ljk5NyAyMzUuMTUgMzkuNDM5IDIzNS4xNSAzOC43NTJWMTAuNTk2QzIzNS4xNSA5LjkxNjAxIDIzNS4zNjcgOS4zNTEwMyAyMzUuODA0IDguOTIyMDNDMjM2LjI0MyA4LjQ4NTAzIDIzNi44MDMgOC4yNzEwMyAyMzcuNDg3IDguMjcxMDNIMjQ2LjE0NkMyNDYuODI5IDguMjcxMDMgMjQ3LjM5IDguNDg1MDMgMjQ3LjgyOCA4LjkyMjAzQzI0OC4yNTkgOS4zNTEwMyAyNDguNDgyIDkuOTE2MDEgMjQ4LjQ4MiAxMC41OTZWMTguMjNIMjQ1LjUzNlYxMC44NDZIMjM4LjA3NVYzOC41MDFIMjQ1LjUzNlYyNy4xNkgyNDIuMDE0VjI0LjY0MkgyNDguNDgyVjM4Ljc1MlYzOC43NTJaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMjMxLjE4NSA0MC44NDhIMjI1LjM4NEwyMTYuNzE0IDI2LjIxNVY0MC44NDhIMjExLjQ1VjguMDQxMDJIMjE2LjcxNFYyMS45MTVMMjI0LjU1NSA4LjA0MTAySDIzMC4zMTFWOC4yNzAwMkwyMjEuMTY1IDIzLjg0N0wyMzEuMTg1IDQwLjg0OFY0MC44NDhaTTIwNS4wMDQgNDAuODQ4SDE5OS43NFY4LjA0MTAySDIwNS4wMDRWNDAuODQ4Wk0xOTQuNDI3IDEyLjM3N0gxODguNjI2VjQwLjg0OEgxODMuMzg1VjEyLjM3N0gxNzcuNTg0VjguMDQxMDJIMTk0LjQyN1YxMi4zNzdWMTIuMzc3Wk0xNjcuNTUyIDEyLjI1NkgxNjEuMTIyVjI0Ljc0OUgxNjcuNTUyVjEyLjI1NlpNMTcyLjg1NCAyNS45MDFDMTcyLjg1NCAyNy45MzcgMTcxLjc4NCAyOC45NjMgMTY5LjYzOSAyOC45NjNIMTYxLjEyMVY0MC44NDhIMTU1Ljg1N1Y4LjA0MTAySDE2OS42MzlDMTcxLjc4NyA4LjA0MTAyIDE3Mi44NTQgOS4wNTMgMTcyLjg1NCAxMS4wNjFWMjUuOTAxVjI1LjkwMVpNMTQ0LjIzOSAxMi4yNTZIMTM3LjAyNlYzNi42MzRIMTQ0LjIzOVYxMi4yNTZaTTE0OS41MDMgMzcuODVDMTQ5LjUwMyAzOS44NDYgMTQ4LjQzNiA0MC44NDggMTQ2LjMxMSA0MC44NDhIMTM0Ljg5M0MxMzIuODA2IDQwLjg0OCAxMzEuNzYyIDM5Ljg0NiAxMzEuNzYyIDM3Ljg1VjExLjA2MUMxMzEuNzYyIDkuMDUgMTMyLjgwNSA4LjA0MTAyIDEzNC44OTMgOC4wNDEwMkgxNDYuMzExQzE0OC40MzYgOC4wNDEwMiAxNDkuNTAzIDkuMDUxIDE0OS41MDMgMTEuMDYxVjM3Ljg1WiIgZmlsbD0iYmxhY2siLz4KPC9nPgo8L3N2Zz4K" alt="Optik Gstaad">
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Schließen">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav">
+    <a href="https://www.optikgstaad.ch/de/produkte.html">Produkte</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/brillen.html">Brillen</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/kontaktlinsen.html">Kontaktlinsen</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/eyecare-produkte.html">Eyecare-Produkte</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/brillenglaeser.html">Brillengläser</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/fernoptik.html">Fernoptik</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/produkte/freitag-bags.html">FREITAG</a>
+    <div class="favr-drawer__divider"></div>
+    <a href="https://www.optikgstaad.ch/de/dienstleistungen.html">Dienstleistungen</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/dienstleistungen/augenpruefung.html">Augenprüfung</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/dienstleistungen/kontaktlinsen.html">Kontaktlinsen</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/dienstleistungen/kinderaugen.html">Kinderaugen</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/dienstleistungen/fuehrerausweise.html">Führerausweise</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/dienstleistungen/atelierarbeiten.html">Atelierarbeiten</a>
+    <div class="favr-drawer__divider"></div>
+    <a href="https://www.optikgstaad.ch/de/inside.html">Inside</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/team.html">Team</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/karriere.html">Karriere</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/geschaeft.html">Geschäft</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/schaufensterkunst.html">Schaufensterkunst</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/stories.html">Stories</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/events.html">Events</a>
+    <a class="favr-drawer__sub-link" href="https://www.optikgstaad.ch/de/inside/weitere-projekte.html">Weitere Projekte</a>
+  </nav>
+</div>
+
+<header class="favr-header" role="banner">
+
+  <div class="favr-header__top">
+    <a class="favr-header__logo" href="https://www.optikgstaad.ch/de/" aria-label="Optik Gstaad">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzM1IiBoZWlnaHQ9IjQ5IiB2aWV3Qm94PSIwIDAgMzM1IDQ5IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNODEuNTg4IDIwLjYzNFYyOC40MzdIOTcuMzJWNDAuMjY4SDY1Ljg1NVYyOC40MzdINTguMDUyVjQ4LjA3MUgxMDUuMTIzVjIwLjYzNEg4MS41ODhaTTU4LjA1MiAxVjIwLjYzNEg2NS44NTVWOC44MDMwMUg5Ny4zMlYxNC43MTlIMTA1LjEyM1YxSDU4LjA1MloiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik0xIDFWNDguMDcxSDQ0LjE2OUg0OC4wNzFWMjguNDM3SDQwLjI2OFY0MC4yNjhIOC44MDMwNFY4LjgwMzAxSDQwLjI2OFYyMC42MzRINDguMDcxVjFIMVoiIGZpbGw9ImJsYWNrIi8+CjxtYXNrIGlkPSJtYXNrMF8xXzIiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjEiIHk9IjEiIHdpZHRoPSIzMzQiIGhlaWdodD0iNDgiPgo8cGF0aCBkPSJNMzM0LjU3MyAxSDFWNDguMDcxSDMzNC41NzNWMVoiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF8xXzIpIj4KPHBhdGggZD0iTTMzMS42NDggMzQuODUyVjE0LjQ1MkMzMzEuNjQ4IDEzLjM3OSAzMzEuMzAzIDEyLjUwNiAzMzAuNjI3IDExLjg0OEMzMjkuOTQ1IDExLjE4MyAzMjkuMDYxIDEwLjg0NiAzMjcuOTgzIDEwLjg0NkgzMjMuOTE1VjM4LjUwMUgzMjcuODFDMzI4Ljk1MyAzOC41MDEgMzI5Ljg3MyAzOC4xNzIgMzMwLjU4NCAzNy41MjFDMzMxLjI4OSAzNi44NzcgMzMxLjY0OCAzNS45ODMgMzMxLjY0OCAzNC44NTJaTTMzNC41NzMgMzUuMTQ1QzMzNC41NzMgMzYuODc3IDMzMy45OTggMzguMzAxIDMzMi44NTUgMzkuNDFDMzMxLjcxMiA0MC41MTkgMzMwLjI2OCA0MS4wNzcgMzI4LjUyOSA0MS4wNzdIMzIwLjk5VjguMjcxMDNIMzI4LjUyOUMzMzAuMjgzIDguMjcxMDMgMzMxLjcyNyA4LjgyODAxIDMzMi44NyA5LjkzNzAxQzMzNC4wMDUgMTEuMDQ3IDMzNC41NzMgMTIuNDcxIDMzNC41NzMgMTQuMjAyVjM1LjE0NVYzNS4xNDVaTTMxMi41OTYgMzEuMjAzTDMwOS43MDYgMTMuNDI5TDMwNi44MDMgMzEuMjAzSDMxMi41OTZaTTMxNy4wMzcgNDEuMDc3SDMxNC4xMzRMMzEyLjk2OSAzMy43NzlIMzA2LjQyMkwzMDUuMjY1IDQxLjA3N0gzMDIuNDQ4VjQwLjk5MUwzMDguMzE5IDguMTg1MDNIMzExLjIwMUwzMTcuMDM3IDQxLjA3N1Y0MS4wNzdaTTI5NS4zNTUgMzEuMjAzTDI5Mi40NjUgMTMuNDI5TDI4OS41NjIgMzEuMjAzSDI5NS4zNTVaTTI5OS43OTYgNDEuMDc3SDI5Ni44OTJMMjk1LjcyOCAzMy43NzlIMjg5LjE4MUwyODguMDI0IDQxLjA3N0gyODUuMjA3VjQwLjk5MUwyOTEuMDc4IDguMTg1MDNIMjkzLjk2TDI5OS43OTYgNDEuMDc3VjQxLjA3N1pNMjgzLjA3MiAxMC44NDZIMjc3Ljk3N1Y0MS4wNzdIMjc1LjA1MlYxMC44NDZIMjY5LjkxM1Y4LjI3MTAzSDI4My4wNzJWMTAuODQ2Wk0yNjYuNTQyIDM4Ljc1MkMyNjYuNTQyIDM5LjQzOSAyNjYuMzM0IDM5Ljk5NyAyNjUuOTAzIDQwLjQyNkMyNjUuNDcyIDQwLjg2MyAyNjQuOTE4IDQxLjA3NyAyNjQuMjI4IDQxLjA3N0gyNTUuOTM1QzI1NS4yNDUgNDEuMDc3IDI1NC42NzcgNDAuODYzIDI1NC4yMzkgNDAuNDI2QzI1My43OTMgMzkuOTk3IDI1My41NzcgMzkuNDM5IDI1My41NzcgMzguNzUyVjMwLjQzSDI1Ni41MDNWMzguNTAxSDI2My42MTdWMzAuNjgxTDI1NC41MTkgMTkuNzRDMjUzLjg5NCAxOC45ODIgMjUzLjU3NyAxOC4xNTIgMjUzLjU3NyAxNy4yNDNWMTAuNTk2QzI1My41NzcgOS45MTYwMSAyNTMuNzkzIDkuMzUxMDMgMjU0LjIzOSA4LjkyMjAzQzI1NC42NzcgOC40ODUwMyAyNTUuMjQ1IDguMjcxMDMgMjU1LjkzNSA4LjI3MTAzSDI2NC4yMjhDMjY0LjkxOCA4LjI3MTAzIDI2NS40NzIgOC40ODUwMyAyNjUuOTAzIDguOTIyMDNDMjY2LjMzNCA5LjM1MTAzIDI2Ni41NDIgOS45MTYwMSAyNjYuNTQyIDEwLjU5NlYxOC4yM0gyNjMuNjE3VjEwLjg0NkgyNTYuNTAzVjE3Ljc2NkwyNjUuNjM3IDI4LjcwNkMyNjYuMjQxIDI5LjQzNiAyNjYuNTQyIDMwLjI1MSAyNjYuNTQyIDMxLjE2VjM4Ljc1MlYzOC43NTJaTTI0OC40ODIgMzguNzUyQzI0OC40ODIgMzkuNDM5IDI0OC4yNTkgMzkuOTk3IDI0Ny44MjggNDAuNDI2QzI0Ny4zOSA0MC44NjMgMjQ2LjgyOSA0MS4wNzcgMjQ2LjE0NiA0MS4wNzdIMjM3LjQ4N0MyMzYuODAzIDQxLjA3NyAyMzYuMjQzIDQwLjg2MyAyMzUuODA0IDQwLjQyNkMyMzUuMzY3IDM5Ljk5NyAyMzUuMTUgMzkuNDM5IDIzNS4xNSAzOC43NTJWMTAuNTk2QzIzNS4xNSA5LjkxNjAxIDIzNS4zNjcgOS4zNTEwMyAyMzUuODA0IDguOTIyMDNDMjM2LjI0MyA4LjQ4NTAzIDIzNi44MDMgOC4yNzEwMyAyMzcuNDg3IDguMjcxMDNIMjQ2LjE0NkMyNDYuODI5IDguMjcxMDMgMjQ3LjM5IDguNDg1MDMgMjQ3LjgyOCA4LjkyMjAzQzI0OC4yNTkgOS4zNTEwMyAyNDguNDgyIDkuOTE2MDEgMjQ4LjQ4MiAxMC41OTZWMTguMjNIMjQ1LjUzNlYxMC44NDZIMjM4LjA3NVYzOC41MDFIMjQ1LjUzNlYyNy4xNkgyNDIuMDE0VjI0LjY0MkgyNDguNDgyVjM4Ljc1MlYzOC43NTJaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMjMxLjE4NSA0MC44NDhIMjI1LjM4NEwyMTYuNzE0IDI2LjIxNVY0MC44NDhIMjExLjQ1VjguMDQxMDJIMjE2LjcxNFYyMS45MTVMMjI0LjU1NSA4LjA0MTAySDIzMC4zMTFWOC4yNzAwMkwyMjEuMTY1IDIzLjg0N0wyMzEuMTg1IDQwLjg0OFY0MC44NDhaTTIwNS4wMDQgNDAuODQ4SDE5OS43NFY4LjA0MTAySDIwNS4wMDRWNDAuODQ4Wk0xOTQuNDI3IDEyLjM3N0gxODguNjI2VjQwLjg0OEgxODMuMzg1VjEyLjM3N0gxNzcuNTg0VjguMDQxMDJIMTk0LjQyN1YxMi4zNzdWMTIuMzc3Wk0xNjcuNTUyIDEyLjI1NkgxNjEuMTIyVjI0Ljc0OUgxNjcuNTUyVjEyLjI1NlpNMTcyLjg1NCAyNS45MDFDMTcyLjg1NCAyNy45MzcgMTcxLjc4NCAyOC45NjMgMTY5LjYzOSAyOC45NjNIMTYxLjEyMVY0MC44NDhIMTU1Ljg1N1Y4LjA0MTAySDE2OS42MzlDMTcxLjc4NyA4LjA0MTAyIDE3Mi44NTQgOS4wNTMgMTcyLjg1NCAxMS4wNjFWMjUuOTAxVjI1LjkwMVpNMTQ0LjIzOSAxMi4yNTZIMTM3LjAyNlYzNi42MzRIMTQ0LjIzOVYxMi4yNTZaTTE0OS41MDMgMzcuODVDMTQ5LjUwMyAzOS44NDYgMTQ4LjQzNiA0MC44NDggMTQ2LjMxMSA0MC44NDhIMTM0Ljg5M0MxMzIuODA2IDQwLjg0OCAxMzEuNzYyIDM5Ljg0NiAxMzEuNzYyIDM3Ljg1VjExLjA2MUMxMzEuNzYyIDkuMDUgMTMyLjgwNSA4LjA0MTAyIDEzNC44OTMgOC4wNDEwMkgxNDYuMzExQzE0OC40MzYgOC4wNDEwMiAxNDkuNTAzIDkuMDUxIDE0OS41MDMgMTEuMDYxVjM3Ljg1WiIgZmlsbD0iYmxhY2siLz4KPC9nPgo8L3N2Zz4K" alt="Optik Gstaad">
+    </a>
+    <nav class="favr-header__nav1">
+      <a href="https://www.optikgstaad.ch/de/produkte.html" style="color:#bc9135;">Produkte</a>
+      <label class="favr-dienst-label" for="favr-toggle-dienst">Dienstleistungen</label>
+      <label class="favr-inside-label" for="favr-toggle-inside">Inside</label>
+    </nav>
+    <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </label>
+  </div>
+
+  <div class="favr-header__sub">
+    <div class="favr-header__sub-inner">
+      <nav class="favr-header__nav2 favr-sub-produkte">
+        <a style="color:#bc9135;" href="https://www.optikgstaad.ch/de/produkte/brillen.html">Brillen</a>
+        <a href="https://www.optikgstaad.ch/de/produkte/kontaktlinsen.html">Kontaktlinsen</a>
+        <a href="https://www.optikgstaad.ch/de/produkte/eyecare-produkte.html">Eyecare-Produkte</a>
+        <a href="https://www.optikgstaad.ch/de/produkte/brillenglaeser.html">Brillengläser</a>
+        <a href="https://www.optikgstaad.ch/de/produkte/fernoptik.html">Fernoptik</a>
+        <a href="https://www.optikgstaad.ch/de/produkte/freitag-bags.html">FREITAG</a>
+      </nav>
+      <nav class="favr-header__nav2 favr-sub-dienst">
+        <a style="color:#bc9135;" href="https://www.optikgstaad.ch/de/dienstleistungen/augenpruefung.html">Augenprüfung</a>
+        <a href="https://www.optikgstaad.ch/de/dienstleistungen/kontaktlinsen.html">Kontaktlinsen</a>
+        <a href="https://www.optikgstaad.ch/de/dienstleistungen/kinderaugen.html">Kinderaugen</a>
+        <a href="https://www.optikgstaad.ch/de/dienstleistungen/fuehrerausweise.html">Führerausweise</a>
+        <a href="https://www.optikgstaad.ch/de/dienstleistungen/atelierarbeiten.html">Atelierarbeiten</a>
+      </nav>
+      <nav class="favr-header__nav2 favr-sub-inside">
+        <a style="color:#bc9135;" href="https://www.optikgstaad.ch/de/inside/team.html">Team</a>
+        <a href="https://www.optikgstaad.ch/de/inside/karriere.html">Karriere</a>
+        <a href="https://www.optikgstaad.ch/de/inside/geschaeft.html">Geschäft</a>
+        <a href="https://www.optikgstaad.ch/de/inside/schaufensterkunst.html">Schaufensterkunst</a>
+        <a href="https://www.optikgstaad.ch/de/inside/stories.html">Stories</a>
+        <a href="https://www.optikgstaad.ch/de/inside/events.html">Events</a>
+        <a href="https://www.optikgstaad.ch/de/inside/weitere-projekte.html">Weitere Projekte</a>
+      </nav>
+    </div>
+  </div>
+
+</header>
