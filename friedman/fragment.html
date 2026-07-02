@@ -1,0 +1,225 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Friedman Optometry (Culver City, CA)
+     Zweizeilig: Info-Bar (Adresse/CTA-Pills/VSP-Badge) + Hauptnav
+     Frame-Referenz: 1200px
+     Breakpoint <1024px: Hauptnav → Burger (Drawer)
+     Breakpoint <640px:  Info-Bar stapelt, Badge ausgeblendet
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #favr-burger-toggle { display: none !important; width: 0 !important; overflow: hidden !important; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; max-width: 84vw; height: 100vh;
+    background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+    transition: right 0.28s ease;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.12); flex-shrink: 0;
+  }
+  .favr-drawer__logo {
+    font-size: 15px; font-weight: 400; letter-spacing: 0.05em;
+    color: #111; text-transform: uppercase;
+  }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 30px; height: 30px;
+    border-radius: 50%; transition: background 0.12s; flex-shrink: 0;
+  }
+  .favr-drawer__close:hover { background: rgba(0,0,0,0.08); }
+  .favr-drawer__close svg {
+    width: 18px; height: 18px; fill: none; stroke: #0f1c47;
+    stroke-width: 2; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #1a1a1a; text-decoration: none;
+    font-size: 14px; padding: 13px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    font-weight: 500; transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: rgba(0,0,0,0.05); }
+  .favr-drawer__cta {
+    padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; margin-top: auto;
+    border-top: 1px solid rgba(0,0,0,0.12);
+  }
+  .favr-drawer__cta a {
+    display: block; text-align: center; text-decoration: none;
+    background: #0f1c47; color: #fff; font-size: 13px; font-weight: 600;
+    padding: 11px 14px; border-radius: 999px;
+  }
+
+  /* Info bar */
+  .favr-topbar {
+    width: 100%; background: #ebebe9;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .favr-topbar__inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; padding: 16px 24px;
+  }
+  .favr-topbar__address {
+    color: #171717; font-size: 13px; line-height: 1.5;
+    text-decoration: underline; flex: 1 1 auto; min-width: 0;
+  }
+  .favr-topbar__actions {
+    display: flex; align-items: center; gap: 10px; flex: 0 0 auto;
+  }
+  .favr-topbar__actions a {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #0f1c47; color: #ffffff; text-decoration: none;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    padding: 11px 18px; border-radius: 999px;
+  }
+  .favr-topbar__actions a svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .favr-topbar__badge { flex: 0 0 auto; display: flex; align-items: center; }
+  .favr-topbar__badge img { height: 46px; width: auto; display: block; }
+
+  /* Main nav */
+  .favr-header {
+    width: 100%; background: #ffffff;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    position: sticky; top: 0; z-index: 1000;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .favr-header__inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 22px 24px;
+  }
+  .favr-header__logo {
+    flex: 0 0 auto; text-decoration: none;
+    font-size: 17px; font-weight: 400; letter-spacing: 0.04em;
+    color: #111111; text-transform: uppercase; white-space: nowrap;
+  }
+  .favr-header__nav {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 22px; flex: 1 1 auto; justify-content: flex-end;
+  }
+  .favr-header__nav a {
+    color: #1a1a1a; text-decoration: none;
+    font-size: 14px; font-weight: 400;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .favr-header__nav a:hover { opacity: 0.6; }
+
+  .favr-header__burger {
+    display: none; cursor: pointer;
+    width: 26px; height: 20px; flex-direction: column;
+    justify-content: space-between; flex-shrink: 0;
+  }
+  .favr-header__burger svg { width: 26px; height: 20px; }
+  .favr-header__burger svg line {
+    stroke: #0f1c47; stroke-width: 2; stroke-linecap: round;
+  }
+
+  /* ===== Breakpoint 1: <1024px – Hauptnav wird zu Burger ===== */
+  @media (max-width: 1024px) {
+    .favr-header__nav { display: none; }
+    .favr-header__burger { display: flex; align-items: center; }
+    .favr-header__inner { padding: 18px 20px; }
+    .favr-header__logo { font-size: 15px; }
+  }
+
+  /* ===== Breakpoint 2: <760px – Info-Bar räumt auf ===== */
+  @media (max-width: 760px) {
+    .favr-topbar__inner { flex-wrap: wrap; padding: 12px 16px; gap: 10px; }
+    .favr-topbar__address { font-size: 11.5px; flex: 1 1 100%; order: 1; }
+    .favr-topbar__actions { order: 2; flex: 1 1 auto; flex-wrap: wrap; gap: 8px; }
+    .favr-topbar__actions a { font-size: 12px; padding: 9px 13px; }
+    .favr-topbar__badge { display: none; }
+  }
+
+  /* ===== Breakpoint 3: <420px – Buttons auf Text/Call reduzieren ===== */
+  @media (max-width: 420px) {
+    .favr-topbar__actions a span.favr-btn-label { display: none; }
+    .favr-topbar__actions a { padding: 9px 12px; }
+    .favr-header__logo { font-size: 13px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" />
+<label class="favr-overlay" for="favr-burger-toggle"></label>
+
+<div class="favr-drawer">
+  <div class="favr-drawer__head">
+    <span class="favr-drawer__logo">Friedman Optometry</span>
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hauptnavigation mobil">
+    <a href="https://www.friedmanoptical.com/about-us/">About Us</a>
+    <a href="https://www.friedmanoptical.com/eye-care-services/eye-condition-and-disease-management/myopia-management/">Myopia Control</a>
+    <a href="https://www.friedmanoptical.com/eye-care-services/">Services</a>
+    <a href="https://www.friedmanoptical.com/eyeglasses/">Eyeglasses</a>
+    <a href="https://www.friedmanoptical.com/contact-lenses/">Contact Lenses</a>
+    <a href="https://www.friedmanoptical.com/luxury-eyewear/">Luxury Eyewear</a>
+    <a href="https://www.friedmanoptical.com/patient-center/insurance/">Insurance</a>
+    <a href="https://www.friedmanoptical.com/whats-new/">Blogs</a>
+    <a href="https://www.friedmanoptical.com/hours-and-location/">Contact Us</a>
+  </nav>
+  <div class="favr-drawer__cta">
+    <a href="https://book2.getweave.com/e4328ac0-88a7-416f-8cf5-974bc3348254/request-appointment?source=WEBSITE">Book Appointment</a>
+    <a href="tel:+14245873606">Call Us</a>
+  </div>
+</div>
+
+<div class="favr-topbar">
+  <div class="favr-topbar__inner">
+    <a class="favr-topbar__address" href="https://www.friedmanoptical.com/hours-and-location/">Find Us at 10724 Washington Boulevard, Culver City, California</a>
+    <div class="favr-topbar__actions">
+      <a href="https://book2.getweave.com/e4328ac0-88a7-416f-8cf5-974bc3348254/request-appointment?source=WEBSITE">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+        <span class="favr-btn-label">Book Appointment</span>
+      </a>
+      <a href="tel:+14245873606"><span class="favr-btn-label">Call Us</span></a>
+      <a href="sms:+13105590500"><span class="favr-btn-label">Text Us</span></a>
+    </div>
+    <div class="favr-topbar__badge">
+      <!-- VSP Premier Edge Badge: Platzhalter, bitte Original-Datei liefern (CDN-Fetch blockiert) -->
+      <img src="data:image/webp;base64,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" alt="VSP Premier Edge" />
+    </div>
+  </div>
+</div>
+
+<header class="favr-header">
+  <div class="favr-header__inner">
+    <a class="favr-header__logo" href="https://www.friedmanoptical.com/">Friedman Optometry</a>
+
+    <nav class="favr-header__nav" aria-label="Hauptnavigation">
+      <a href="https://www.friedmanoptical.com/about-us/">About Us</a>
+      <a href="https://www.friedmanoptical.com/eye-care-services/eye-condition-and-disease-management/myopia-management/">Myopia Control</a>
+      <a href="https://www.friedmanoptical.com/eye-care-services/">Services</a>
+      <a href="https://www.friedmanoptical.com/eyeglasses/">Eyeglasses</a>
+      <a href="https://www.friedmanoptical.com/contact-lenses/">Contact Lenses</a>
+      <a href="https://www.friedmanoptical.com/luxury-eyewear/">Luxury Eyewear</a>
+      <a href="https://www.friedmanoptical.com/patient-center/insurance/">Insurance</a>
+      <a href="https://www.friedmanoptical.com/whats-new/">Blogs</a>
+      <a href="https://www.friedmanoptical.com/hours-and-location/">Contact Us</a>
+    </nav>
+
+    <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </label>
+  </div>
+</header>
