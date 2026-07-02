@@ -142,10 +142,11 @@
   }
 
   @media (max-width: 900px) {
-    .favr-header__inner { height: 60px; padding: 0 16px; }
-    .favr-header__logo img { height: 30px; }
+    .favr-header__inner { height: 100px; padding: 0 20px; position: relative; justify-content: center; }
+    .favr-header__logo { position: absolute; left: 50%; transform: translateX(-50%); }
+    .favr-header__logo img { height: 50px; }
     .favr-header__nav { display: none; }
-    .favr-header__burger { display: flex; }
+    .favr-header__burger { display: flex; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
   }
 </style>
 
