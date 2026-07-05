@@ -1,0 +1,226 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Zoute Optics (Knokke-Heist, BE)
+     Creme/Terracotta, Serif-Logo, Frame 1900px (27" Referenz)
+     Top-Row: Telefon-Pill links, Afspraak+FR rechts
+     Haupt-Row: Logo+Subtext+Virtual-Try-On links, Nav+Burger rechts
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #favr-burger-toggle { display: none !important; width: 0 !important; overflow: hidden !important; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(43,29,20,0.35); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; max-width: 86vw; height: 100vh;
+    background: #F7EDE4;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(43,29,20,0.18);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 22px; border-bottom: 1px solid rgba(129,81,49,0.2); flex-shrink: 0;
+  }
+  .favr-drawer__logo {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px; font-weight: 400; letter-spacing: 0.06em;
+    color: #815131; text-transform: uppercase;
+  }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s; flex-shrink: 0;
+  }
+  .favr-drawer__close:hover { background: rgba(129,81,49,0.08); }
+  .favr-drawer__close svg {
+    width: 18px; height: 18px; fill: none; stroke: #815131;
+    stroke-width: 1.6; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #815131; text-decoration: none;
+    font-family: 'Campton', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 15px 22px;
+    border-bottom: 1px solid rgba(129,81,49,0.15);
+    font-weight: 500; transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: rgba(129,81,49,0.06); }
+  .favr-drawer__nav a.favr-active { color: #815131; }
+  .favr-drawer__cta { padding: 18px 22px; margin-top: auto; border-top: 1px solid rgba(129,81,49,0.2); display: flex; flex-direction: column; gap: 10px; }
+  .favr-drawer__cta a {
+    display: block; text-align: center; text-decoration: none;
+    border: 1px solid #815131; color: #815131; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 11px 14px; border-radius: 999px;
+  }
+
+  /* Wrapper */
+  .favr-header { width: 100%; background: #F7EDE4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+
+  /* Top row */
+  .favr-topbar__inner {
+    max-width: 1900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 20px 48px 0;
+  }
+  .favr-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(129,81,49,0.5); border-radius: 999px;
+    color: #815131; text-decoration: none;
+    font-size: 13px; font-weight: 300; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap; padding: 9px 18px;
+    transition: background 0.15s;
+  }
+  .favr-pill:hover { background: rgba(129,81,49,0.08); }
+  .favr-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .favr-topbar__right { display: flex; align-items: center; gap: 10px; }
+  .favr-pill--lang { padding: 9px 14px; }
+
+  /* Main row */
+  .favr-header__inner {
+    max-width: 1900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; padding: 18px 48px 26px;
+  }
+  .favr-header__brand { display: flex; align-items: center; gap: 22px; flex: 1 1 auto; min-width: 0; }
+  .favr-header__logo { text-decoration: none; flex-shrink: 0; }
+  .favr-header__logo-text {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 34px; font-weight: 400; letter-spacing: 0.05em;
+    color: #815131; text-transform: uppercase; white-space: nowrap; display: block; line-height: 1.1;
+  }
+  .favr-header__logo-sub {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.22em;
+    color: #a3826b; text-transform: uppercase; white-space: nowrap; display: block; margin-top: 2px;
+  }
+  .favr-header__divider { width: 1px; height: 34px; background: rgba(129,81,49,0.3); flex-shrink: 0; }
+  .favr-header__tryon {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #815131; text-decoration: none;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .favr-header__tryon svg { width: 13px; height: 13px; }
+
+  .favr-header__right { display: flex; align-items: center; gap: 34px; flex: 0 0 auto; }
+  .favr-header__nav { display: flex; align-items: center; gap: 30px; }
+  .favr-header__nav a {
+    color: #815131; text-decoration: none;
+    font-family: 'Campton', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    white-space: nowrap; padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .favr-header__nav a:hover { color: #5f3b23; }
+  .favr-header__nav a.favr-active { color: #815131; }
+
+  .favr-header__burger {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer;
+    width: 44px; height: 44px; border: 1px solid rgba(129,81,49,0.5); border-radius: 50%; flex-shrink: 0;
+  }
+  .favr-header__burger span { display: block; width: 16px; height: 1.5px; background: #815131; }
+  .favr-topbar__burger { display: none; }
+
+  /* ===== Breakpoint 1: <1100px – Hauptnav zu Burger ===== */
+  @media (max-width: 1100px) {
+    .favr-header__nav { display: none; }
+    .favr-header__inner { padding: 16px 24px 20px; }
+    .favr-header__logo-text { font-size: 26px; }
+    .favr-topbar__inner { padding: 14px 24px 0; }
+  }
+
+  /* ===== Breakpoint 2: <640px – Hauptnavi nur noch zentriertes Logo ===== */
+  @media (max-width: 640px) {
+    .favr-header__tryon { display: none; }
+    .favr-header__divider { display: none; }
+    .favr-header__right { display: none; }
+    .favr-header__inner { justify-content: center; padding: 10px 16px 18px; }
+    .favr-header__brand { justify-content: center; flex: 0 0 auto; }
+    .favr-header__logo-sub { font-size: 9px; letter-spacing: 0.18em; }
+    .favr-pill span.favr-pill-label { display: none; }
+    .favr-pill { padding: 8px 10px; }
+    .favr-topbar__inner { padding: 10px 16px 0; gap: 8px; }
+    .favr-topbar__burger { display: flex; width: 38px; height: 38px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" />
+<label class="favr-overlay" for="favr-burger-toggle"></label>
+
+<div class="favr-drawer">
+  <div class="favr-drawer__head">
+    <span class="favr-drawer__logo">Zoute Optics</span>
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Menu sluiten">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hoofdnavigatie mobiel">
+    <a href="https://www.zouteoptics.be/brillen/">Brillen</a>
+    <a href="https://www.zouteoptics.be/glazen/">Glazen</a>
+    <a href="https://www.zouteoptics.be/optometrie/">Optometrie</a>
+    <a class="favr-active" href="https://www.zouteoptics.be/merk/">Merken</a>
+    <a href="https://www.zouteoptics.be/contact/">Contact</a>
+  </nav>
+  <div class="favr-drawer__cta">
+    <a href="https://www.favrspecs.com/nl/opticiens/in/knokke-heist/1050/zoute-optics/39460/">Virtual try on</a>
+    <a href="https://onlineagenda.morion.be/default.aspx?optician_id=a336547e-a37c-4850-b250-5cc0cbd58623">Maak afspraak</a>
+  </div>
+</div>
+
+<header class="favr-header">
+  <div class="favr-topbar__inner">
+    <a class="favr-pill" href="tel:+32050611112">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#815131" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2.2z"/></svg>
+      <span class="favr-pill-label">+32 (0)50 61 11 12</span>
+    </a>
+    <div class="favr-topbar__right">
+      <a class="favr-pill" href="https://onlineagenda.morion.be/default.aspx?optician_id=a336547e-a37c-4850-b250-5cc0cbd58623">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#815131" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+        <span class="favr-pill-label">Maak afspraak</span>
+      </a>
+      <a class="favr-pill favr-pill--lang" href="https://www.zouteoptics.be/fr/">FR</a>
+      <label class="favr-header__burger favr-topbar__burger" for="favr-burger-toggle" aria-label="Menu openen">
+        <span></span><span></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="favr-header__inner">
+    <div class="favr-header__brand">
+      <a class="favr-header__logo" href="https://www.zouteoptics.be/">
+        <span class="favr-header__logo-text">Zoute Optics</span>
+        <span class="favr-header__logo-sub">By Vandenbalck</span>
+      </a>
+      <div class="favr-header__divider"></div>
+      <a class="favr-header__tryon" href="https://www.favrspecs.com/nl/opticiens/in/knokke-heist/1050/zoute-optics/39460/">
+        <span class="favr-tryon-label">Virtual try on</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#815131" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+
+    <div class="favr-header__right">
+      <nav class="favr-header__nav" aria-label="Hoofdnavigatie">
+        <a href="https://www.zouteoptics.be/brillen/">Brillen</a>
+        <a href="https://www.zouteoptics.be/glazen/">Glazen</a>
+        <a href="https://www.zouteoptics.be/optometrie/">Optometrie</a>
+        <a class="favr-active" href="https://www.zouteoptics.be/merk/">Merken</a>
+        <a href="https://www.zouteoptics.be/contact/">Contact</a>
+      </nav>
+      <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Menu openen">
+        <span></span><span></span>
+      </label>
+    </div>
+  </div>
+</header>
