@@ -58,7 +58,7 @@
   }
 
   /* Info-Bar */
-  .favr-infobar { width: 100%; background: #E8E7D5; border-bottom: 1px solid rgba(180,88,86,0.2); }
+  .favr-infobar { width: 100%; background: #E8E7D5; }
   .favr-infobar__inner {
     width: 100%; margin: 0;
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
@@ -73,14 +73,14 @@
     color: #B45856; text-decoration: none;
     font-size: 12px; font-weight: 400; white-space: nowrap;
   }
-  .favr-infobar__inner a svg { width: 24px; height: 12px; flex-shrink: 0; }
+  .favr-infobar__inner a svg { width: 22px; height: 12px; flex-shrink: 0; }
   .favr-infobar__inner a:hover { opacity: 0.75; }
-  .favr-infobar__center a, .favr-infobar__right a {
-    font-size: 15px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  a.favr-infobar__center, a.favr-infobar__right {
+    font-size: 15px; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
   }
 
   /* Hauptnav */
-  .favr-header { width: 100%; background: #E8E7D5; }
+  .favr-header { width: 100%; background: #E0DFCE; }
   .favr-header__inner {
     width: 100%; margin: 0;
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
@@ -117,10 +117,20 @@
 
   /* ===== Breakpoint 2: <640px – kompakt ===== */
   @media (max-width: 640px) {
-    .favr-infobar__inner a span.favr-infobar-label { display: none; }
-    .favr-infobar__inner { gap: 10px; padding: 8px 16px; }
-    .favr-header__inner { padding: 14px 16px; }
-    .favr-header__logo-img { height: 55px; }
+    .favr-infobar__inner {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; padding: 16px 16px;
+    }
+    .favr-infobar__left { display: none; }
+    a.favr-infobar__center, a.favr-infobar__right { font-size: 14px; }
+
+    .favr-header__inner {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 18px; padding: 24px 16px 20px;
+    }
+    .favr-header__logo { width: 88%; }
+    .favr-header__logo-img { height: auto; width: 100%; }
+    .favr-header__burger { display: flex; }
   }
 </style>
 
@@ -155,7 +165,7 @@
       <span class="favr-infobar-label">Bondgenotenlaan 50A Leuven, T. +32 16 89 29 59</span>
     </a>
     <a class="favr-infobar__center" href="https://www.favrspecs.com/en/opticians/in/leuven/586/vandenbalck-eyewear/10378/pro/eyeglasses/">
-      <svg viewBox="0 0 48 24" fill="none" stroke="#B45856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="8"/><circle cx="38" cy="12" r="8"/><path d="M18 9 L21.5 14 L26.5 14 L30 9"/></svg>
+      <svg viewBox="0 0 44 24" fill="none" stroke="#B45856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="15" r="7"/><circle cx="35" cy="15" r="7"/><path d="M9,8 C7,5 6,4 6.5,2"/><path d="M35,8 C37,5 38,4 37.5,2"/><path d="M16,11 L22,16 L28,11"/></svg>
       <span class="favr-infobar-label">Pas je bril online</span>
     </a>
     <a class="favr-infobar__right" href="http://shop.vandenbalck.be">
