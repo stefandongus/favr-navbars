@@ -1,0 +1,204 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – City Optik Stockholm
+     Weiß, Logo+Nav zentriert, Account/Sök/Varukorg rechts (Frame 1750px)
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #favr-burger-toggle { display: none !important; width: 0 !important; overflow: hidden !important; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; max-width: 86vw; height: 100vh;
+    background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.16);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.1); flex-shrink: 0;
+  }
+  .favr-drawer__logo-svg { height: 38px; width: auto; display: block; }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 32px; height: 32px;
+    border-radius: 50%; transition: background 0.12s; flex-shrink: 0;
+  }
+  .favr-drawer__close:hover { background: rgba(0,0,0,0.06); }
+  .favr-drawer__close svg {
+    width: 18px; height: 18px; fill: none; stroke: #1d1d1b;
+    stroke-width: 1.6; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #1d1d1b; text-decoration: none;
+    font-size: 14px; padding: 14px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    font-weight: 400; transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: rgba(0,0,0,0.04); }
+  .favr-drawer__utility { padding: 14px 20px; display: flex; flex-direction: column; gap: 12px; margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); }
+  .favr-drawer__utility a { display: flex; align-items: center; gap: 10px; color: #1d1d1b; text-decoration: none; font-size: 13px; }
+  .favr-drawer__utility svg { width: 16px; height: 16px; stroke: #1d1d1b; fill: none; stroke-width: 1.6; }
+
+  /* Header */
+  .favr-header { width: 100%; background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+
+  .favr-header__row1 {
+    max-width: 1750px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 20px; padding: 18px 40px 14px;
+  }
+  .favr-header__spacer { justify-self: start; }
+  .favr-header__logo { display: block; text-decoration: none; justify-self: center; }
+  .favr-header__logo-svg { height: 87px; width: auto; display: block; }
+
+  .favr-header__utility { display: flex; align-items: center; gap: 26px; justify-self: end; }
+  .favr-header__utility a {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #1d1d1b; text-decoration: none; font-size: 13px; white-space: nowrap;
+  }
+  .favr-header__utility svg { width: 17px; height: 17px; stroke: #1d1d1b; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+  .favr-header__utility a:hover { opacity: 0.6; }
+
+  .favr-header__row2 {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    width: 100%;
+  }
+  .favr-header__nav {
+    max-width: 1750px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 30px; padding: 22px 40px 14px; flex-wrap: wrap;
+  }
+  .favr-header__nav a {
+    color: #1d1d1b; text-decoration: none;
+    font-size: 14px; font-weight: 300;
+    white-space: nowrap; padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: opacity 0.15s;
+  }
+  .favr-header__nav a:hover { opacity: 0.6; }
+  .favr-header__nav a.favr-active { border-bottom-color: #1d1d1b; }
+
+  .favr-header__burger {
+    display: none; cursor: pointer; justify-self: end;
+    width: 24px; height: 16px; flex-direction: column;
+    justify-content: space-between; flex-shrink: 0;
+  }
+  .favr-header__burger span { display: block; height: 1.5px; width: 100%; background: #1d1d1b; }
+
+  /* ===== Breakpoint 1: <1050px – Nav zu Burger, Logo/Utility neu angeordnet ===== */
+  @media (max-width: 1050px) {
+    .favr-header__row2 { display: none; }
+    .favr-header__row1 {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px 12px;
+    }
+    .favr-header__spacer { display: flex; align-items: center; order: 1; }
+    .favr-header__burger { display: flex; }
+    .favr-header__logo { order: 2; margin-right: auto; margin-left: 16px; }
+    .favr-header__logo-svg { height: 63px; }
+    .favr-header__utility { order: 3; gap: 18px; }
+    .favr-header__utility a[href*="customer_authentication"] { display: none; }
+    .favr-header__utility a span.favr-utility-label { display: none; }
+  }
+
+  /* ===== Breakpoint 2: <560px – kompakt ===== */
+  @media (max-width: 560px) {
+    .favr-header__row1 { padding: 14px 16px; gap: 10px; }
+    .favr-header__logo-svg { height: 48px; }
+    .favr-header__utility { gap: 16px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" />
+<label class="favr-overlay" for="favr-burger-toggle"></label>
+
+<div class="favr-drawer">
+  <div class="favr-drawer__head">
+    <svg class="favr-drawer__logo-svg" viewBox="0 0 269.29 297.64" xmlns="http://www.w3.org/2000/svg"><g><path d="M51.43,84.9c-7.08,0-13.18-1.45-18.13-4.31A31.75,31.75,0,0,1,21.49,68.74,32.29,32.29,0,0,1,17.14,52.4a31.36,31.36,0,0,1,10-23.49C33.7,22.6,42,19.4,51.61,19.4c6.64,0,14.11,1.76,22.21,5.22l.36.15V35.86l-.9-.51c-7.21-4.12-14.35-6.21-21.22-6.21s-12.88,2.23-17.48,6.64A22.1,22.1,0,0,0,27.64,52.4,21.91,21.91,0,0,0,34.46,69C39,73.25,44.89,75.43,52,75.43c7.46,0,14.85-2.33,22-6.91l.93-.6V79.26l-.32.17A47.64,47.64,0,0,1,51.43,84.9Zm177.17-.72H218.19V50.58L194.38,20.21h12.37l.18.23,16.32,21L240,20.21h12.44L228.6,50.58Zm-68.72,0H149.65V29.32H128.13v-9.2h53.62v9.2H159.88Zm-52,0H97.68v-64h10.18Z" fill="#1d1d1b"></path></g><g><path d="M175.19,277.26h-15V252.74h4.36V273.2h10.6Z" fill="#1d1d1b"></path></g><g><path d="M245,277.26h-4.38V259.89l-6.49,8.16H233l-6.57-8.17v17.38h-4.37V252.74H226l7.58,9.36,7.53-9.36H245Z" fill="#1d1d1b"></path><path d="M100.9,277.21a12.8,12.8,0,0,1-9.2-3.55,11.92,11.92,0,0,1-3.7-8.91,12.15,12.15,0,0,1,3.72-9.08,14.09,14.09,0,0,1,18.79,0,12,12,0,0,1,3.78,9,11.77,11.77,0,0,1-3.82,9A13.55,13.55,0,0,1,100.9,277.21Zm.32-20.93a8.71,8.71,0,0,0-6.29,2.38,8.17,8.17,0,0,0-2.44,6.09,7.9,7.9,0,0,0,2.45,6,9.17,9.17,0,0,0,12.4-.05,8.14,8.14,0,0,0,2.48-6.05,7.84,7.84,0,0,0-2.48-5.93h0A8.49,8.49,0,0,0,101.22,256.28Z" fill="#1d1d1b"></path></g><g><path d="M43.34,277.26H39V267H26.75v10.23H22.38V252.74h4.37v10.17H39V252.74h4.37Z" fill="#1d1d1b"></path></g><path d="M250.21,228.45h-8.53L223.8,211.18v17.27h-6.2V191.1h6.2V207l14.58-15.85h7.86L230,208.83Z" fill="#1d1d1b"></path><polygon points="61.61 196.18 74.07 196.18 74.07 227.94 79.3 227.94 79.3 196.18 91.97 196.18 91.97 191.54 61.61 191.54 61.61 196.18" fill="#1d1d1b"></polygon><path d="M79.8,228.44H73.57V196.67H61.11V191H92.47v5.63H79.8Z" fill="#1d1d1b"></path><g><path d="M185.1,228.45a20.92,20.92,0,0,1-10.58-2.52,18.46,18.46,0,0,1-6.89-6.92,18.89,18.89,0,0,1-2.54-9.53,18.32,18.32,0,0,1,5.81-13.71,20,20,0,0,1,14.31-5.55,33.37,33.37,0,0,1,12.91,3l.31.13v6.79l-.75-.43a24.69,24.69,0,0,0-12.21-3.58,14,14,0,0,0-10,3.81,13.42,13.42,0,0,0-.06,19,14.06,14.06,0,0,0,10,3.71,23.19,23.19,0,0,0,12.64-4l.77-.5v6.94l-.26.14A27.72,27.72,0,0,1,185.1,228.45Z" fill="#1d1d1b"></path><path d="M126.9,228.46a19.52,19.52,0,0,1-14-5.4,18.12,18.12,0,0,1-5.63-13.57,18.54,18.54,0,0,1,5.66-13.83h0a19.82,19.82,0,0,1,14.29-5.47,20.08,20.08,0,0,1,14.36,5.47,18.19,18.19,0,0,1,5.76,13.73,17.94,17.94,0,0,1-5.81,13.67A20.65,20.65,0,0,1,126.9,228.46Zm.49-32.33a13.66,13.66,0,0,0-9.9,3.76,12.84,12.84,0,0,0-3.87,9.6,12.67,12.67,0,0,0,3.88,9.43,14.46,14.46,0,0,0,19.54-.08,12.86,12.86,0,0,0,3.91-9.55,12.55,12.55,0,0,0-3.91-9.36h0A13.4,13.4,0,0,0,127.39,196.13Z" fill="#1d1d1b"></path><path d="M33.31,228.44A16.55,16.55,0,0,1,23.2,225l-.2-.15v-8.3l.89,1.13c2.7,3.42,5.85,5.15,9.36,5.15A5.67,5.67,0,0,0,37,221.62a3.76,3.76,0,0,0,1.45-3c0-2-1.53-4-4.55-5.87L30,210.32a18.6,18.6,0,0,1-5.44-4.61,9,9,0,0,1-1.67-5.35A9.48,9.48,0,0,1,26,193a11.7,11.7,0,0,1,8.08-2.81,15.21,15.21,0,0,1,8.63,2.64l.22.15v7.35l-.84-.82A11.65,11.65,0,0,0,34,195.89a6.54,6.54,0,0,0-3.9,1.09,3.08,3.08,0,0,0-1.43,2.61,4.11,4.11,0,0,0,1.09,2.74,14.64,14.64,0,0,0,3.75,2.88l4,2.35c4.57,2.74,6.89,6.28,6.89,10.55a9.77,9.77,0,0,1-3.08,7.46A11.26,11.26,0,0,1,33.31,228.44Z" fill="#1d1d1b"></path></g><path d="M249.75,162.31h-11l-.17-.16-23.19-22.41v22.57h-8V113.76h8v20.72l19.07-20.72h10.1l-21.07,23Z" fill="#1d1d1b"></path><path d="M188.21,162.31h-8V113.76h8Z" fill="#1d1d1b"></path><path d="M151.35,162.37h-8V121H127.09v-7.23h40.76V121h-16.5Z" fill="#1d1d1b"></path><g><path d="M94.45,162.37h-8V113.75h15.62c4.65,0,8.43,1.28,11.22,3.81a13.26,13.26,0,0,1,4.23,10.28,13.8,13.8,0,0,1-2.17,7.65,12.44,12.44,0,0,1-5.94,4.85c-2.45,1-6,1.49-10.53,1.49H94.45Zm0-27.78h6.82a8.85,8.85,0,0,0,6-1.8,6.35,6.35,0,0,0,2-5.12c0-4.5-2.75-6.69-8.42-6.69H94.45Z" fill="#1d1d1b"></path><path d="M43.33,163a25.38,25.38,0,0,1-18.25-7,23.56,23.56,0,0,1-7.31-17.63,24.06,24.06,0,0,1,7.36-18c4.88-4.72,11.13-7.12,18.57-7.12s13.73,2.39,18.69,7.12a23.71,23.71,0,0,1,7.49,17.85,23.33,23.33,0,0,1-7.56,17.78C57.32,160.58,50.93,163,43.33,163ZM44,120.81A17.9,17.9,0,0,0,31,125.73,16.81,16.81,0,0,0,26,138.28a16.5,16.5,0,0,0,5.07,12.31,17.65,17.65,0,0,0,12.72,4.92,17.65,17.65,0,0,0,12.81-5A16.84,16.84,0,0,0,61.7,138a16.44,16.44,0,0,0-5.12-12.23h0A17.47,17.47,0,0,0,44,120.81Z" fill="#1d1d1b"></path></g></svg>
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Stäng meny">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Huvudnavigation mobil">
+    <a href="https://cityoptik.se/">Hem</a>
+    <a href="https://cityoptik.se/pages/synundersokning">Synundersökning</a>
+    <a href="https://cityoptik.se/pages/glasogon/">Glasögon</a>
+    <a href="https://cityoptik.se/pages/linser">Linser</a>
+    <a href="https://cityoptik.se/pages/solglasogon">Solglasögon</a>
+    <a href="https://cityoptik.se/pages/om-oss">Om oss</a>
+    <a href="https://cityoptik.se/blogs/news">Blogg</a>
+    <a href="https://cityoptik.se/pages/kontakta-oss">Kontakt</a>
+    <a href="https://cityoptik.se/pages/aktuella-erbjudanden">Cityoptik tipsar</a>
+    <a href="https://cityoptik.se/collections/all">Shop</a>
+  </nav>
+  <div class="favr-drawer__utility">
+    <a href="https://cityoptik.se/customer_authentication/redirect?locale=sv&region_country=SE">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      Account
+    </a>
+    <a href="https://cityoptik.se/search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Sök
+    </a>
+    <a href="https://cityoptik.se/cart">
+      <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      Varukorg (0)
+    </a>
+  </div>
+</div>
+
+<header class="favr-header">
+  <div class="favr-header__row1">
+    <span class="favr-header__spacer">
+      <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Öppna meny">
+        <span></span><span></span><span></span>
+      </label>
+    </span>
+
+    <a class="favr-header__logo" href="https://cityoptik.se/">
+      <svg class="favr-header__logo-svg" viewBox="0 0 269.29 297.64" xmlns="http://www.w3.org/2000/svg"><g><path d="M51.43,84.9c-7.08,0-13.18-1.45-18.13-4.31A31.75,31.75,0,0,1,21.49,68.74,32.29,32.29,0,0,1,17.14,52.4a31.36,31.36,0,0,1,10-23.49C33.7,22.6,42,19.4,51.61,19.4c6.64,0,14.11,1.76,22.21,5.22l.36.15V35.86l-.9-.51c-7.21-4.12-14.35-6.21-21.22-6.21s-12.88,2.23-17.48,6.64A22.1,22.1,0,0,0,27.64,52.4,21.91,21.91,0,0,0,34.46,69C39,73.25,44.89,75.43,52,75.43c7.46,0,14.85-2.33,22-6.91l.93-.6V79.26l-.32.17A47.64,47.64,0,0,1,51.43,84.9Zm177.17-.72H218.19V50.58L194.38,20.21h12.37l.18.23,16.32,21L240,20.21h12.44L228.6,50.58Zm-68.72,0H149.65V29.32H128.13v-9.2h53.62v9.2H159.88Zm-52,0H97.68v-64h10.18Z" fill="#1d1d1b"></path></g><g><path d="M175.19,277.26h-15V252.74h4.36V273.2h10.6Z" fill="#1d1d1b"></path></g><g><path d="M245,277.26h-4.38V259.89l-6.49,8.16H233l-6.57-8.17v17.38h-4.37V252.74H226l7.58,9.36,7.53-9.36H245Z" fill="#1d1d1b"></path><path d="M100.9,277.21a12.8,12.8,0,0,1-9.2-3.55,11.92,11.92,0,0,1-3.7-8.91,12.15,12.15,0,0,1,3.72-9.08,14.09,14.09,0,0,1,18.79,0,12,12,0,0,1,3.78,9,11.77,11.77,0,0,1-3.82,9A13.55,13.55,0,0,1,100.9,277.21Zm.32-20.93a8.71,8.71,0,0,0-6.29,2.38,8.17,8.17,0,0,0-2.44,6.09,7.9,7.9,0,0,0,2.45,6,9.17,9.17,0,0,0,12.4-.05,8.14,8.14,0,0,0,2.48-6.05,7.84,7.84,0,0,0-2.48-5.93h0A8.49,8.49,0,0,0,101.22,256.28Z" fill="#1d1d1b"></path></g><g><path d="M43.34,277.26H39V267H26.75v10.23H22.38V252.74h4.37v10.17H39V252.74h4.37Z" fill="#1d1d1b"></path></g><path d="M250.21,228.45h-8.53L223.8,211.18v17.27h-6.2V191.1h6.2V207l14.58-15.85h7.86L230,208.83Z" fill="#1d1d1b"></path><polygon points="61.61 196.18 74.07 196.18 74.07 227.94 79.3 227.94 79.3 196.18 91.97 196.18 91.97 191.54 61.61 191.54 61.61 196.18" fill="#1d1d1b"></polygon><path d="M79.8,228.44H73.57V196.67H61.11V191H92.47v5.63H79.8Z" fill="#1d1d1b"></path><g><path d="M185.1,228.45a20.92,20.92,0,0,1-10.58-2.52,18.46,18.46,0,0,1-6.89-6.92,18.89,18.89,0,0,1-2.54-9.53,18.32,18.32,0,0,1,5.81-13.71,20,20,0,0,1,14.31-5.55,33.37,33.37,0,0,1,12.91,3l.31.13v6.79l-.75-.43a24.69,24.69,0,0,0-12.21-3.58,14,14,0,0,0-10,3.81,13.42,13.42,0,0,0-.06,19,14.06,14.06,0,0,0,10,3.71,23.19,23.19,0,0,0,12.64-4l.77-.5v6.94l-.26.14A27.72,27.72,0,0,1,185.1,228.45Z" fill="#1d1d1b"></path><path d="M126.9,228.46a19.52,19.52,0,0,1-14-5.4,18.12,18.12,0,0,1-5.63-13.57,18.54,18.54,0,0,1,5.66-13.83h0a19.82,19.82,0,0,1,14.29-5.47,20.08,20.08,0,0,1,14.36,5.47,18.19,18.19,0,0,1,5.76,13.73,17.94,17.94,0,0,1-5.81,13.67A20.65,20.65,0,0,1,126.9,228.46Zm.49-32.33a13.66,13.66,0,0,0-9.9,3.76,12.84,12.84,0,0,0-3.87,9.6,12.67,12.67,0,0,0,3.88,9.43,14.46,14.46,0,0,0,19.54-.08,12.86,12.86,0,0,0,3.91-9.55,12.55,12.55,0,0,0-3.91-9.36h0A13.4,13.4,0,0,0,127.39,196.13Z" fill="#1d1d1b"></path><path d="M33.31,228.44A16.55,16.55,0,0,1,23.2,225l-.2-.15v-8.3l.89,1.13c2.7,3.42,5.85,5.15,9.36,5.15A5.67,5.67,0,0,0,37,221.62a3.76,3.76,0,0,0,1.45-3c0-2-1.53-4-4.55-5.87L30,210.32a18.6,18.6,0,0,1-5.44-4.61,9,9,0,0,1-1.67-5.35A9.48,9.48,0,0,1,26,193a11.7,11.7,0,0,1,8.08-2.81,15.21,15.21,0,0,1,8.63,2.64l.22.15v7.35l-.84-.82A11.65,11.65,0,0,0,34,195.89a6.54,6.54,0,0,0-3.9,1.09,3.08,3.08,0,0,0-1.43,2.61,4.11,4.11,0,0,0,1.09,2.74,14.64,14.64,0,0,0,3.75,2.88l4,2.35c4.57,2.74,6.89,6.28,6.89,10.55a9.77,9.77,0,0,1-3.08,7.46A11.26,11.26,0,0,1,33.31,228.44Z" fill="#1d1d1b"></path></g><path d="M249.75,162.31h-11l-.17-.16-23.19-22.41v22.57h-8V113.76h8v20.72l19.07-20.72h10.1l-21.07,23Z" fill="#1d1d1b"></path><path d="M188.21,162.31h-8V113.76h8Z" fill="#1d1d1b"></path><path d="M151.35,162.37h-8V121H127.09v-7.23h40.76V121h-16.5Z" fill="#1d1d1b"></path><g><path d="M94.45,162.37h-8V113.75h15.62c4.65,0,8.43,1.28,11.22,3.81a13.26,13.26,0,0,1,4.23,10.28,13.8,13.8,0,0,1-2.17,7.65,12.44,12.44,0,0,1-5.94,4.85c-2.45,1-6,1.49-10.53,1.49H94.45Zm0-27.78h6.82a8.85,8.85,0,0,0,6-1.8,6.35,6.35,0,0,0,2-5.12c0-4.5-2.75-6.69-8.42-6.69H94.45Z" fill="#1d1d1b"></path><path d="M43.33,163a25.38,25.38,0,0,1-18.25-7,23.56,23.56,0,0,1-7.31-17.63,24.06,24.06,0,0,1,7.36-18c4.88-4.72,11.13-7.12,18.57-7.12s13.73,2.39,18.69,7.12a23.71,23.71,0,0,1,7.49,17.85,23.33,23.33,0,0,1-7.56,17.78C57.32,160.58,50.93,163,43.33,163ZM44,120.81A17.9,17.9,0,0,0,31,125.73,16.81,16.81,0,0,0,26,138.28a16.5,16.5,0,0,0,5.07,12.31,17.65,17.65,0,0,0,12.72,4.92,17.65,17.65,0,0,0,12.81-5A16.84,16.84,0,0,0,61.7,138a16.44,16.44,0,0,0-5.12-12.23h0A17.47,17.47,0,0,0,44,120.81Z" fill="#1d1d1b"></path></g></svg>
+    </a>
+
+    <div class="favr-header__utility">
+      <a href="https://cityoptik.se/customer_authentication/redirect?locale=sv&region_country=SE">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <span class="favr-utility-label">Account</span>
+      </a>
+      <a href="https://cityoptik.se/search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="favr-utility-label">Sök</span>
+      </a>
+      <a href="https://cityoptik.se/cart">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="favr-utility-label">Varukorg</span> <span class="favr-utility-count">(0)</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="favr-header__row2">
+    <nav class="favr-header__nav" aria-label="Huvudnavigation">
+      <a class="favr-active" href="https://cityoptik.se/">Hem</a>
+      <a href="https://cityoptik.se/pages/synundersokning">Synundersökning</a>
+      <a href="https://cityoptik.se/pages/glasogon/">Glasögon</a>
+      <a href="https://cityoptik.se/pages/linser">Linser</a>
+      <a href="https://cityoptik.se/pages/solglasogon">Solglasögon</a>
+      <a href="https://cityoptik.se/pages/om-oss">Om oss</a>
+      <a href="https://cityoptik.se/blogs/news">Blogg</a>
+      <a href="https://cityoptik.se/pages/kontakta-oss">Kontakt</a>
+      <a href="https://cityoptik.se/pages/aktuella-erbjudanden">Cityoptik tipsar</a>
+      <a href="https://cityoptik.se/collections/all">Shop</a>
+    </nav>
+  </div>
+</header>
