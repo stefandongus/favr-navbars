@@ -1,0 +1,189 @@
+<style>
+  /* =============================================
+     FAVR Header Fragment – Brillerei (Bern/Riggisberg/Köniz)
+     Weiß, Schwarz-Text, Salbeigrün-Akzent (#7C9B6A)
+     Dropdown bei "Brillen"
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #favr-burger-toggle { display: none !important; width: 0 !important; overflow: hidden !important; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -300px;
+    width: 280px; max-width: 86vw; height: 100vh;
+    background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.16);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px; border-bottom: 1px solid rgba(0,0,0,0.1); flex-shrink: 0;
+  }
+  .favr-drawer__logo-img { height: 26px; width: auto; display: block; }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; width: 30px; height: 30px;
+    border-radius: 50%; transition: background 0.12s; flex-shrink: 0;
+  }
+  .favr-drawer__close:hover { background: rgba(0,0,0,0.06); }
+  .favr-drawer__close svg {
+    width: 17px; height: 17px; fill: none; stroke: #111111;
+    stroke-width: 1.8; stroke-linecap: round;
+  }
+  .favr-drawer__nav a {
+    display: block; color: #111111; text-decoration: none;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    padding: 13px 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: background 0.12s;
+  }
+  .favr-drawer__nav a:hover { background: rgba(124,155,106,0.1); }
+  .favr-drawer__sublist a {
+    padding-left: 32px; font-size: 13px; font-weight: 500; color: #3a3a3a;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* Header */
+  .favr-header { width: 100%; background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+  .favr-header__inner {
+    width: 100%; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 24px; padding: 22px 40px;
+  }
+  .favr-header__logo { display: block; text-decoration: none; justify-self: start; grid-column: 1; }
+  .favr-header__logo-img { height: 48px; width: auto; display: block; }
+
+  .favr-header__nav { display: flex; align-items: center; gap: 26px; justify-self: center; padding-top: 60px; grid-column: 2; }
+  .favr-header__nav a {
+    color: #111111; text-decoration: none;
+    font-size: 20px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .favr-header__nav a:hover { opacity: 0.6; }
+
+  .favr-header__actions { display: flex; align-items: center; gap: 20px; justify-self: end; grid-column: 3; }
+
+  .favr-navitem { position: relative; }
+  .favr-navitem__trigger { display: inline-flex; align-items: center; gap: 4px; }
+  .favr-navitem__trigger svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .favr-navitem:hover .favr-navitem__trigger { color: #7C9B6A; }
+  .favr-submenu {
+    display: none; position: absolute; top: 100%; left: 0; margin-top: 0;
+    min-width: 220px; z-index: 1500;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+  }
+  .favr-navitem { padding-bottom: 12px; margin-bottom: -12px; }
+  .favr-navitem:hover .favr-submenu { display: block; }
+  .favr-submenu__head {
+    display: block; text-decoration: none;
+    background: #7C9B6A; color: #ffffff;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    padding: 12px 18px;
+  }
+  .favr-submenu__head:hover { background: #6d8a5c; }
+  .favr-submenu__body { background: #ffffff; padding: 6px 0; }
+  .favr-submenu a {
+    display: block; color: #111111; text-decoration: none;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
+    padding: 11px 18px;
+  }
+  .favr-submenu a:hover { background: rgba(0,0,0,0.06); }
+
+
+  .favr-header__burger {
+    display: none; cursor: pointer;
+    width: 24px; height: 16px; flex-direction: column;
+    justify-content: space-between; flex-shrink: 0;
+  }
+  .favr-header__burger span { display: block; height: 2px; width: 100%; background: #111111; }
+
+  /* ===== Breakpoint 1: <1150px – Nav zu Burger ===== */
+  @media (max-width: 1150px) {
+    .favr-header__nav { display: none; }
+    .favr-header__burger { display: flex; }
+    .favr-header__inner { padding: 16px 24px; }
+  }
+
+  /* ===== Breakpoint 2: <560px – kompakt ===== */
+  @media (max-width: 560px) {
+    .favr-header__inner { padding: 14px 16px; }
+    .favr-header__logo-img { height: 37px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" />
+<label class="favr-overlay" for="favr-burger-toggle"></label>
+
+<div class="favr-drawer">
+  <div class="favr-drawer__head">
+    <img class="favr-drawer__logo-img" src="data:image/png;base64,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" alt="Brillerei" />
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hauptnavigation mobil">
+    <a href="https://brillerei.ch/brillen-und-linsen/brillen/">Brillen</a>
+    <div class="favr-drawer__sublist">
+      <a href="https://brillerei.ch/brillenglaeser/">Brillengläser</a>
+      <a href="https://brillerei.ch/brillen-und-linsen/sportbrillen/">Sportbrillen</a>
+      <a href="https://brillerei.ch/brillen-und-linsen/kinderbrillen/">Kinderbrillen</a>
+      <a href="https://brillerei.ch/brillen-und-linsen/fernoptik/">Fernoptik</a>
+      <a href="https://brillerei.ch/enchroma/">Enchroma</a>
+      <a href="https://brillerei.ch/schiessbrillen/">Schiessbrillen</a>
+    </div>
+    <a href="https://brillerei.ch/kontaktlinsen/">Kontaktlinsen</a>
+    <a href="https://brillerei.ch/gesundheitsoptik/">Gesundheitsoptik</a>
+    <a href="https://brillerei.ch/wer-wir-sind/">Wer wir sind</a>
+    <a href="https://brillerei.ch/news/">News</a>
+    <a href="https://brillerei.ch/kontakt/">Kontakt</a>
+  </nav>
+</div>
+
+<header class="favr-header">
+  <div class="favr-header__inner">
+    <a class="favr-header__logo" href="https://brillerei.ch/">
+      <img class="favr-header__logo-img" src="data:image/png;base64,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" alt="Brillerei" />
+    </a>
+
+    <nav class="favr-header__nav" aria-label="Hauptnavigation">
+      <div class="favr-navitem">
+        <a class="favr-navitem__trigger" href="https://brillerei.ch/brillen-und-linsen/brillen/">Brillen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="favr-submenu">
+          <a class="favr-submenu__head" href="https://brillerei.ch/brillen-und-linsen/brillen/">Brillen</a>
+          <div class="favr-submenu__body">
+            <a href="https://brillerei.ch/brillenglaeser/">Brillengläser</a>
+            <a href="https://brillerei.ch/brillen-und-linsen/sportbrillen/">Sportbrillen</a>
+            <a href="https://brillerei.ch/brillen-und-linsen/kinderbrillen/">Kinderbrillen</a>
+            <a href="https://brillerei.ch/brillen-und-linsen/fernoptik/">Fernoptik</a>
+            <a href="https://brillerei.ch/enchroma/">Enchroma</a>
+            <a href="https://brillerei.ch/schiessbrillen/">Schiessbrillen</a>
+          </div>
+        </div>
+      </div>
+      <a href="https://brillerei.ch/kontaktlinsen/">Kontaktlinsen</a>
+      <a href="https://brillerei.ch/gesundheitsoptik/">Gesundheitsoptik</a>
+      <a href="https://brillerei.ch/wer-wir-sind/">Wer wir sind</a>
+      <a href="https://brillerei.ch/news/">News</a>
+      <a href="https://brillerei.ch/kontakt/">Kontakt</a>
+    </nav>
+
+    <div class="favr-header__actions">
+      <label class="favr-header__burger" for="favr-burger-toggle" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </label>
+    </div>
+  </div>
+</header>
