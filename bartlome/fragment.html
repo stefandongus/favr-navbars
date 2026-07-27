@@ -1,0 +1,145 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500&display=swap');
+
+  /* =============================================
+     FAVR Header Fragment – Bartlomé Optik (Olten)
+     Logobar 95px (weiß, Logo+Burger mittig/rechts)
+     Navbar 36px (hellgrau, 4 Punkte zentriert)
+     Burger: voller 8-Punkte-Drawer
+     ============================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #favr-burger-toggle { display: none !important; width: 0 !important; overflow: hidden !important; }
+
+  .favr-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 2000; cursor: pointer;
+  }
+  #favr-burger-toggle:checked ~ .favr-overlay { display: block; }
+  #favr-burger-toggle:checked ~ .favr-drawer { right: 0; }
+
+  /* Drawer */
+  .favr-drawer {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; max-width: 88vw; height: 100vh;
+    background: #ffffff;
+    z-index: 2001; display: flex; flex-direction: column;
+    overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.18);
+    transition: right 0.28s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  .favr-drawer__head {
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 16px 16px 4px;
+  }
+  .favr-drawer__close {
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%; background: #000000; flex-shrink: 0;
+  }
+  .favr-drawer__close svg { width: 18px; height: 18px; fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: round; }
+  .favr-drawer__nav { padding: 10px 0; }
+  .favr-drawer__nav a {
+    display: flex; align-items: center; justify-content: space-between;
+    color: #1a1a1a; text-decoration: none;
+    font-size: 16px; font-weight: 400; padding: 15px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .favr-drawer__nav a:hover { background: rgba(0,0,0,0.03); }
+  .favr-drawer__nav a svg { width: 14px; height: 14px; stroke: #9a9a9a; fill: none; stroke-width: 2; flex-shrink: 0; }
+  .favr-drawer__nav a.favr-blog { color: #1a6fd1; }
+
+  /* Logobar */
+  .favr-logobar { width: 100%; min-height: 95px; background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+  .favr-logobar__inner {
+    width: 100%; min-height: 95px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 20px; padding: 10px 30px;
+  }
+  .favr-logobar__spacer { grid-column: 1; }
+  .favr-logobar__logo { display: block; text-decoration: none; grid-column: 2; justify-self: center; }
+  .favr-logobar__logo-img { height: 92px; width: auto; display: block; }
+
+  .favr-logobar__burger {
+    grid-column: 3; justify-self: end; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%; background: #000000;
+    flex-shrink: 0;
+  }
+  .favr-logobar__burger-lines { display: flex; flex-direction: column; gap: 5px; width: 26px; }
+  .favr-logobar__burger-lines span { display: block; height: 2.6px; width: 100%; background: #ffffff; }
+
+  /* Navbar (untere schmale Leiste) */
+  .favr-navbar { width: 100%; min-height: 36px; background: #E0E0E0; padding: 6px 0; }
+  .favr-navbar__inner {
+    width: 100%; height: 100%; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 34px;
+  }
+  .favr-navbar__inner a {
+    color: #000000; text-decoration: none;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 17px; font-weight: 200;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .favr-navbar__inner a:hover { opacity: 0.6; }
+  .favr-navbar__inner a.favr-active { color: #000000; font-weight: 200; }
+
+  /* ===== Breakpoint: <760px – untere Navbar ausblenden ===== */
+  /* ===== Breakpoint: <650px – Abstände enger, Nav bleibt sichtbar ===== */
+  @media (max-width: 650px) {
+    .favr-navbar__inner { gap: 16px; }
+    .favr-navbar__inner a { font-size: 14px; }
+  }
+
+  /* ===== Breakpoint: <480px – untere Navbar ausblenden ===== */
+  @media (max-width: 480px) {
+    .favr-navbar { display: none; }
+    .favr-logobar { min-height: 74px; }
+    .favr-logobar__inner { min-height: 74px; padding: 8px 18px; }
+    .favr-logobar__logo-img { height: 69px; }
+    .favr-logobar__burger { width: 38px; height: 38px; }
+  }
+</style>
+
+<input type="checkbox" id="favr-burger-toggle" />
+<label class="favr-overlay" for="favr-burger-toggle"></label>
+
+<div class="favr-drawer">
+  <div class="favr-drawer__head">
+    <label class="favr-drawer__close" for="favr-burger-toggle" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </label>
+  </div>
+  <nav class="favr-drawer__nav" aria-label="Hauptnavigation mobil">
+    <a href="https://www.bartlome-optik.ch/brillen-und-sonnenbrillen.html">Brillen <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a href="https://www.bartlome-optik.ch/brillenglaeser.html">Brillengläser <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a href="https://www.bartlome-optik.ch/kontaktlinsen.html">Kontaktlinsen <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a href="https://www.bartlome-optik.ch/dienstleistungen-143.html">Dienstleistungen <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a href="https://www.bartlome-optik.ch/atelier-146.html">Atelier</a>
+    <a href="https://www.bartlome-optik.ch/ueber-bartlome-optik.html">Über uns <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a href="https://www.bartlome-optik.ch/kontakt.html">Kontakt <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></a>
+    <a class="favr-blog" href="https://www.bartlome-optik.ch/blog.html">Blog</a>
+  </nav>
+</div>
+
+<header class="favr-logobar">
+  <div class="favr-logobar__inner">
+    <span class="favr-logobar__spacer"></span>
+    <a class="favr-logobar__logo" href="https://www.bartlome-optik.ch/willkommen.html">
+      <img class="favr-logobar__logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAABfCAYAAAD1YUxVAAAKQ2lDQ1BJQ0MgcHJvZmlsZQAAeNqdU3dYk/cWPt/3ZQ9WQtjwsZdsgQAiI6wIyBBZohCSAGGEEBJAxYWIClYUFRGcSFXEgtUKSJ2I4qAouGdBiohai1VcOO4f3Ke1fXrv7e371/u855zn/M55zw+AERImkeaiagA5UoU8Otgfj09IxMm9gAIVSOAEIBDmy8JnBcUAAPADeXh+dLA//AGvbwACAHDVLiQSx+H/g7pQJlcAIJEA4CIS5wsBkFIAyC5UyBQAyBgAsFOzZAoAlAAAbHl8QiIAqg0A7PRJPgUA2KmT3BcA2KIcqQgAjQEAmShHJAJAuwBgVYFSLALAwgCgrEAiLgTArgGAWbYyRwKAvQUAdo5YkA9AYACAmUIszAAgOAIAQx4TzQMgTAOgMNK/4KlfcIW4SAEAwMuVzZdL0jMUuJXQGnfy8ODiIeLCbLFCYRcpEGYJ5CKcl5sjE0jnA0zODAAAGvnRwf44P5Dn5uTh5mbnbO/0xaL+a/BvIj4h8d/+vIwCBAAQTs/v2l/l5dYDcMcBsHW/a6lbANpWAGjf+V0z2wmgWgrQevmLeTj8QB6eoVDIPB0cCgsL7SViob0w44s+/zPhb+CLfvb8QB7+23rwAHGaQJmtwKOD/XFhbnauUo7nywRCMW735yP+x4V//Y4p0eI0sVwsFYrxWIm4UCJNx3m5UpFEIcmV4hLpfzLxH5b9CZN3DQCshk/ATrYHtctswH7uAQKLDljSdgBAfvMtjBoLkQAQZzQyefcAAJO/+Y9AKwEAzZek4wAAvOgYXKiUF0zGCAAARKCBKrBBBwzBFKzADpzBHbzAFwJhBkRADCTAPBBCBuSAHAqhGJZBGVTAOtgEtbADGqARmuEQtMExOA3n4BJcgetwFwZgGJ7CGLyGCQRByAgTYSE6iBFijtgizggXmY4EImFINJKApCDpiBRRIsXIcqQCqUJqkV1II/ItchQ5jVxA+pDbyCAyivyKvEcxlIGyUQPUAnVAuagfGorGoHPRdDQPXYCWomvRGrQePYC2oqfRS+h1dAB9io5jgNExDmaM2WFcjIdFYIlYGibHFmPlWDVWjzVjHVg3dhUbwJ5h7wgkAouAE+wIXoQQwmyCkJBHWExYQ6gl7CO0EroIVwmDhDHCJyKTqE+0JXoS+cR4YjqxkFhGrCbuIR4hniVeJw4TX5NIJA7JkuROCiElkDJJC0lrSNtILaRTpD7SEGmcTCbrkG3J3uQIsoCsIJeRt5APkE+S+8nD5LcUOsWI4kwJoiRSpJQSSjVlP+UEpZ8yQpmgqlHNqZ7UCKqIOp9aSW2gdlAvU4epEzR1miXNmxZDy6Qto9XQmmlnafdoL+l0ugndgx5Fl9CX0mvoB+nn6YP0dwwNhg2Dx0hiKBlrGXsZpxi3GS+ZTKYF05eZyFQw1zIbmWeYD5hvVVgq9ip8FZHKEpU6lVaVfpXnqlRVc1U/1XmqC1SrVQ+rXlZ9pkZVs1DjqQnUFqvVqR1Vu6k2rs5Sd1KPUM9RX6O+X/2C+mMNsoaFRqCGSKNUY7fGGY0hFsYyZfFYQtZyVgPrLGuYTWJbsvnsTHYF+xt2L3tMU0NzqmasZpFmneZxzQEOxrHg8DnZnErOIc4NznstAy0/LbHWaq1mrX6tN9p62r7aYu1y7Rbt69rvdXCdQJ0snfU6bTr3dQm6NrpRuoW623XP6j7TY+t56Qn1yvUO6d3RR/Vt9KP1F+rv1u/RHzcwNAg2kBlsMThj8MyQY+hrmGm40fCE4agRy2i6kcRoo9FJoye4Ju6HZ+M1eBc+ZqxvHGKsNN5l3Gs8YWJpMtukxKTF5L4pzZRrmma60bTTdMzMyCzcrNisyeyOOdWca55hvtm82/yNhaVFnMVKizaLx5balnzLBZZNlvesmFY+VnlW9VbXrEnWXOss623WV2xQG1ebDJs6m8u2qK2brcR2m23fFOIUjynSKfVTbtox7PzsCuya7AbtOfZh9iX2bfbPHcwcEh3WO3Q7fHJ0dcx2bHC866ThNMOpxKnD6VdnG2ehc53zNRemS5DLEpd2lxdTbaeKp26fesuV5RruutK10/Wjm7ub3K3ZbdTdzD3Ffav7TS6bG8ldwz3vQfTw91jicczjnaebp8LzkOcvXnZeWV77vR5Ps5wmntYwbcjbxFvgvct7YDo+PWX6zukDPsY+Ap96n4e+pr4i3z2+I37Wfpl+B/ye+zv6y/2P+L/hefIW8U4FYAHBAeUBvYEagbMDawMfBJkEpQc1BY0FuwYvDD4VQgwJDVkfcpNvwBfyG/ljM9xnLJrRFcoInRVaG/owzCZMHtYRjobPCN8Qfm+m+UzpzLYIiOBHbIi4H2kZmRf5fRQpKjKqLupRtFN0cXT3LNas5Fn7Z72O8Y+pjLk722q2cnZnrGpsUmxj7Ju4gLiquIF4h/hF8ZcSdBMkCe2J5MTYxD2J43MC52yaM5zkmlSWdGOu5dyiuRfm6c7Lnnc8WTVZkHw4hZgSl7I/5YMgQlAvGE/lp25NHRPyhJuFT0W+oo2iUbG3uEo8kuadVpX2ON07fUP6aIZPRnXGMwlPUit5kRmSuSPzTVZE1t6sz9lx2S05lJyUnKNSDWmWtCvXMLcot09mKyuTDeR55m3KG5OHyvfkI/lz89sVbIVM0aO0Uq5QDhZML6greFsYW3i4SL1IWtQz32b+6vkjC4IWfL2QsFC4sLPYuHhZ8eAiv0W7FiOLUxd3LjFdUrpkeGnw0n3LaMuylv1Q4lhSVfJqedzyjlKD0qWlQyuCVzSVqZTJy26u9Fq5YxVhlWRV72qX1VtWfyoXlV+scKyorviwRrjm4ldOX9V89Xlt2treSrfK7etI66Trbqz3Wb+vSr1qQdXQhvANrRvxjeUbX21K3nShemr1js20zcrNAzVhNe1bzLas2/KhNqP2ep1/XctW/a2rt77ZJtrWv913e/MOgx0VO97vlOy8tSt4V2u9RX31btLugt2PGmIbur/mft24R3dPxZ6Pe6V7B/ZF7+tqdG9s3K+/v7IJbVI2jR5IOnDlm4Bv2pvtmne1cFoqDsJB5cEn36Z8e+NQ6KHOw9zDzd+Zf7f1COtIeSvSOr91rC2jbaA9ob3v6IyjnR1eHUe+t/9+7zHjY3XHNY9XnqCdKD3x+eSCk+OnZKeenU4/PdSZ3Hn3TPyZa11RXb1nQ8+ePxd07ky3X/fJ897nj13wvHD0Ivdi2yW3S609rj1HfnD94UivW2/rZffL7Vc8rnT0Tes70e/Tf/pqwNVz1/jXLl2feb3vxuwbt24m3Ry4Jbr1+Hb27Rd3Cu5M3F16j3iv/L7a/eoH+g/qf7T+sWXAbeD4YMBgz8NZD+8OCYee/pT/04fh0kfMR9UjRiONj50fHxsNGr3yZM6T4aeypxPPyn5W/3nrc6vn3/3i+0vPWPzY8Av5i8+/rnmp83Lvq6mvOscjxx+8znk98ab8rc7bfe+477rfx70fmSj8QP5Q89H6Y8en0E/3Pud8/vwv94Tz+4A5JREAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADfmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMwNjcgNzkuMTU3NzQ3LCAyMDE1LzAzLzMwLTIzOjQwOjQyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjM4MTUyRjdBQjAwRjExRTdBMjUwODk1NzAwOEZBNTI2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVDNzc0RkUzQjFGNTExRTdCN0Y3QjQwOEU5NjdEMjgyIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVDNzc0RkUyQjFGNTExRTdCN0Y3QjQwOEU5NjdEMjgyIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4NDRkMmI4ZC1hNDllLTQ3MDMtYTRjMS0wM2ZmMzI4MjdjNzUiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpkN2ExY2VlYS1mNmQ2LTExN2EtOTRjNS1jMTIwMmI1OTliZmYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tl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" alt="Bartlomé Optik" />
+    </a>
+    <label class="favr-logobar__burger" for="favr-burger-toggle" aria-label="Menü öffnen">
+      <span class="favr-logobar__burger-lines"><span></span><span></span><span></span></span>
+    </label>
+  </div>
+</header>
+
+<nav class="favr-navbar" aria-label="Hauptnavigation">
+  <div class="favr-navbar__inner">
+    <a class="favr-active" href="https://www.bartlome-optik.ch/brillen-und-sonnenbrillen.html">Brillen</a>
+    <a href="https://www.bartlome-optik.ch/brillenglaeser.html">Brillengläser</a>
+    <a href="https://www.bartlome-optik.ch/kontaktlinsen.html">Kontaktlinsen</a>
+    <a href="https://www.bartlome-optik.ch/dienstleistungen-143.html">Dienstleistungen</a>
+  </div>
+</nav>
