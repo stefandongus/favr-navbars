@@ -1,0 +1,329 @@
+<style>
+  #favr-filia76-nav {
+    box-sizing: border-box;
+    width: 100%;
+    background: #ffffff;
+    font-family: 'Wotfard', 'Helvetica Neue', -apple-system, system-ui, 'Segoe UI', Arial, sans-serif;
+  }
+  #favr-filia76-nav * {
+    box-sizing: border-box;
+  }
+  #favr-filia76-nav .favr-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height: 115px;
+    padding: 0 174px;
+    gap: 24px;
+  }
+  #favr-filia76-nav .favr-logo {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    transform: translateY(-8px);
+  }
+  #favr-filia76-nav .favr-logo svg {
+    height: 51px;
+    width: auto;
+    display: block;
+  }
+  #favr-filia76-nav .favr-links {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 34px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #favr-filia76-nav .favr-links > li {
+    position: relative;
+  }
+  #favr-filia76-nav .favr-links a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #59584f;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  #favr-filia76-nav .favr-links a:hover {
+    opacity: 0.7;
+  }
+  #favr-filia76-nav .favr-chevron {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+  /* Hover dropdown: padding-bottom + negative margin-bottom bridges the gap without breaking hover */
+  #favr-filia76-nav .favr-dropdown-trigger {
+    padding-bottom: 14px;
+    margin-bottom: -14px;
+  }
+  #favr-filia76-nav .favr-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    min-width: 220px;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    z-index: 20;
+  }
+  #favr-filia76-nav li:hover .favr-submenu {
+    display: block;
+  }
+  #favr-filia76-nav .favr-submenu li a {
+    padding: 8px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  #favr-filia76-nav .favr-cta {
+    grid-column: 3;
+    justify-self: end;
+  }
+  #favr-filia76-nav .favr-cta a {
+    color: #bf9f5e;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  #favr-filia76-nav .favr-cta a:hover {
+    opacity: 0.75;
+  }
+
+  /* Burger menu, hidden on desktop */
+  #favr-filia76-nav .favr-burger-label {
+    display: none;
+  }
+  #favr-filia76-burger-toggle {
+    display: none;
+  }
+  #favr-filia76-nav .favr-mobile-panel {
+    display: none;
+  }
+
+  @media (max-width: 1150px) {
+    #favr-filia76-nav .favr-inner {
+      grid-template-columns: auto 1fr auto;
+      padding: 0 24px;
+      height: 80px;
+    }
+    #favr-filia76-nav .favr-logo {
+      grid-column: 1;
+    }
+    #favr-filia76-nav .favr-links {
+      display: none;
+    }
+    #favr-filia76-nav .favr-cta {
+      grid-column: 2;
+      justify-self: center;
+    }
+    #favr-filia76-nav .favr-cta a {
+      font-size: 18px;
+    }
+    #favr-filia76-nav .favr-burger-label {
+      grid-column: 3;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+    #favr-filia76-nav .favr-burger-label svg {
+      width: 26px;
+      height: 18px;
+      display: block;
+    }
+    #favr-filia76-burger-toggle:checked ~ .favr-inner .favr-mobile-panel {
+      display: block;
+    }
+    #favr-filia76-nav .favr-mobile-panel {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border-top: 1px solid #eeece6;
+    }
+    #favr-filia76-nav .favr-mobile-links {
+      list-style: none;
+      margin: 0;
+      padding: 12px 24px 20px;
+    }
+    #favr-filia76-nav .favr-mobile-links > li {
+      border-bottom: 1px solid #f1efe9;
+    }
+    #favr-filia76-nav .favr-mobile-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #59584f;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 14px 0;
+    }
+    #favr-filia76-nav .favr-mobile-links .favr-mobile-sub {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 10px 14px;
+    }
+    #favr-filia76-nav .favr-mobile-links .favr-mobile-sub a {
+      font-size: 14px;
+      padding: 8px 0;
+      color: #7a7969;
+    }
+    #favr-filia76-nav .favr-mobile-cta {
+      padding: 14px 0 0;
+    }
+    #favr-filia76-nav .favr-mobile-cta a {
+      color: #bf9f5e;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+<nav id="favr-filia76-nav">
+  <input type="checkbox" id="favr-filia76-burger-toggle">
+  <div class="favr-inner">
+    <a href="https://filia76.de/" class="favr-logo" aria-label="Filia76 Startseite">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.35 50">
+        <g transform="translate(-34.07 -18.87)">
+          <path fill="#59584f" d="M218.26,42.14h-11.7V36.7h18.9v4.427L215.52,62.94h-6.747Z" transform="translate(-57.497 -5.943)"></path>
+          <path fill="#59584f" d="M241.363,61.775a9.907,9.907,0,0,1-3.88-4.167,13.893,13.893,0,0,1-1.387-6.4,18.74,18.74,0,0,1,1.687-8.28,12.167,12.167,0,0,1,4.667-5.273,13.167,13.167,0,0,1,6.94-1.807,15.426,15.426,0,0,1,4.76.667v5.633a8.727,8.727,0,0,0-4.233-.867,6.767,6.767,0,0,0-4.553,1.493,6.96,6.96,0,0,0-2.193,4.507,6.387,6.387,0,0,1,2.587-1.533,10.62,10.62,0,0,1,3.487-.567,9.293,9.293,0,0,1,4.447,1.033,7.233,7.233,0,0,1,3,2.987,9.627,9.627,0,0,1,1.067,4.667,9.433,9.433,0,0,1-1.22,4.787,8.433,8.433,0,0,1-3.633,3.333,12.94,12.94,0,0,1-5.873,1.22,11.113,11.113,0,0,1-5.667-1.433Zm8.567-4.827a3.707,3.707,0,0,0,1.127-2.74,3.847,3.847,0,0,0-3.9-3.9,3.687,3.687,0,0,0-2.733,1.14,3.793,3.793,0,0,0-1.127,2.76,3.847,3.847,0,0,0,3.86,3.867,3.753,3.753,0,0,0,2.76-1.127Z" transform="translate(-67.34 -5.659)"></path>
+          <path fill="#59584f" d="M34.07,36.71H53.1v6.527H41.837v4.147H50.1v5.4h-8.26v10.16H34.07Z" transform="translate(0 -5.947)"></path>
+          <path fill="#59584f" d="M70.39,36.71h7.74V62.943H70.39Z" transform="translate(-12.107 -5.947)"></path>
+          <path fill="#59584f" d="M91,36.71h7.773v19.7h10.58v6.533H91Z" transform="translate(-18.977 -5.947)"></path>
+          <path fill="#59584f" d="M125.38,36.71h7.747V62.943H125.38Z" transform="translate(-30.437 -5.947)"></path>
+          <path fill="#59584f" d="M153.6,36.71h7.467L171.53,62.943h-7.953l-1.953-4.993H153.03l-2,4.993h-7.94Zm6.227,15.333L157.31,44.71,154.8,52.043Z" transform="translate(-36.34 -5.947)"></path>
+          <path fill="#59584f" d="M204.505,68.61a34.927,34.927,0,0,1-2.34-49.373l.333-.367h-1.333a35.893,35.893,0,0,0,2.193,50h1.46Z" transform="translate(-52.668)"></path>
+        </g>
+      </svg>
+    </a>
+
+    <ul class="favr-links">
+      <li><a href="https://www.favrspecs.com/de/optiker/in/kassel/396/filia76-glasses-for-identities/10431/pro/">Online Brillenanprobe</a></li>
+      <li>
+        <a href="https://filia76.de/brillen/" class="favr-dropdown-trigger">Brillen
+          <svg class="favr-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="#59584f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="favr-submenu">
+          <li><a href="https://filia76.de/brillen/arbeitsplatzbrille/">Arbeitsplatzbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/gleitsichtbrille/">Gleitsichtbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/digital-oder-wellnessglaeser/">Digital- oder Wellnessbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/sonnenbrille/">Sonnenbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/kinderbrillen/">Kinderbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/sportbrillen/">Sportbrillen</a></li>
+          <li><a href="https://filia76.de/brillen/markenglaeser/">Markengläser</a></li>
+          <li><a href="https://filia76.de/brillen#c321">Unsere Marken</a></li>
+        </ul>
+      </li>
+      <li><a href="https://filia76.de/kontaktlinsen-kassel/">Kontaktlinsen</a></li>
+      <li>
+        <a href="https://filia76.de/augenmessungen-sehtest-kassel/" class="favr-dropdown-trigger">Sehtest / Screening
+          <svg class="favr-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="#59584f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="favr-submenu">
+          <li><a href="https://filia76.de/augenmessungen/optometrisches-screening/">Augengesundheitscheck</a></li>
+          <li><a href="https://filia76.de/augenmessungen/optometrische-augenmessung/">Premium Sehtest</a></li>
+          <li><a href="https://filia76.de/augenmessungen/traenenfilmanalyse/">Tränenfilmanalyse</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://filia76.de/services/" class="favr-dropdown-trigger">Services
+          <svg class="favr-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="#59584f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="favr-submenu">
+          <li><a href="https://filia76.de/services/brillen-service/">Brillen-Service</a></li>
+          <li><a href="https://filia76.de/services/brillenabo/">Brillenabo</a></li>
+          <li><a href="https://filia76.de/services/garantien/">Garantien</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://filia76.de/ueber-uns/team/" class="favr-dropdown-trigger">Über uns
+          <svg class="favr-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="#59584f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="favr-submenu">
+          <li><a href="https://filia76.de/ueber-uns/team/">Team</a></li>
+          <li><a href="https://filia76.de/kontakt/">Kontakt</a></li>
+          <li><a href="https://filia76.de/ueber-uns/brillen-fuer-mali/">Brillen für Mali</a></li>
+          <li><a href="https://filia76.de/karriere/">Karriere</a></li>
+          <li><a href="https://filia76.de/ueber-uns/karriere/">Jobs</a></li>
+        </ul>
+      </li>
+      <li><a href="https://filia76.de/blog/">Blog</a></li>
+    </ul>
+
+    <div class="favr-cta">
+      <a href="https://filia76.de/termin-buchen">Termin buchen</a>
+    </div>
+
+    <label class="favr-burger-label" for="favr-filia76-burger-toggle" aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 16" fill="none">
+        <line x1="2" y1="2" x2="22" y2="2" stroke="#59584f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="8" y1="8" x2="22" y2="8" stroke="#59584f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="14" y1="14" x2="22" y2="14" stroke="#59584f" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </label>
+
+    <div class="favr-mobile-panel">
+      <ul class="favr-mobile-links">
+        <li><a href="https://www.favrspecs.com/de/optiker/in/kassel/396/filia76-glasses-for-identities/10431/pro/">Online Brillenanprobe</a></li>
+        <li>
+          <a href="https://filia76.de/brillen/">Brillen</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://filia76.de/brillen/arbeitsplatzbrille/">Arbeitsplatzbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/gleitsichtbrille/">Gleitsichtbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/digital-oder-wellnessglaeser/">Digital- oder Wellnessbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/sonnenbrille/">Sonnenbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/kinderbrillen/">Kinderbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/sportbrillen/">Sportbrillen</a></li>
+            <li><a href="https://filia76.de/brillen/markenglaeser/">Markengläser</a></li>
+            <li><a href="https://filia76.de/brillen#c321">Unsere Marken</a></li>
+          </ul>
+        </li>
+        <li><a href="https://filia76.de/kontaktlinsen-kassel/">Kontaktlinsen</a></li>
+        <li>
+          <a href="https://filia76.de/augenmessungen-sehtest-kassel/">Sehtest / Screening</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://filia76.de/augenmessungen/optometrisches-screening/">Augengesundheitscheck</a></li>
+            <li><a href="https://filia76.de/augenmessungen/optometrische-augenmessung/">Premium Sehtest</a></li>
+            <li><a href="https://filia76.de/augenmessungen/traenenfilmanalyse/">Tränenfilmanalyse</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://filia76.de/services/">Services</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://filia76.de/services/brillen-service/">Brillen-Service</a></li>
+            <li><a href="https://filia76.de/services/brillenabo/">Brillenabo</a></li>
+            <li><a href="https://filia76.de/services/garantien/">Garantien</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://filia76.de/ueber-uns/team/">Über uns</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://filia76.de/ueber-uns/team/">Team</a></li>
+            <li><a href="https://filia76.de/kontakt/">Kontakt</a></li>
+            <li><a href="https://filia76.de/ueber-uns/brillen-fuer-mali/">Brillen für Mali</a></li>
+            <li><a href="https://filia76.de/karriere/">Karriere</a></li>
+            <li><a href="https://filia76.de/ueber-uns/karriere/">Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="https://filia76.de/blog/">Blog</a></li>
+      </ul>
+      <div class="favr-mobile-cta">
+        <a href="https://filia76.de/termin-buchen">Termin buchen</a>
+      </div>
+    </div>
+  </div>
+</nav>
