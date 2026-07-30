@@ -1,0 +1,315 @@
+<style>
+  #favr-dieoptiker-nav {
+    box-sizing: border-box;
+    width: 100%;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  #favr-dieoptiker-nav * {
+    box-sizing: border-box;
+  }
+  #favr-dieoptiker-nav .favr-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    padding: 0 40px;
+    position: relative;
+  }
+  #favr-dieoptiker-nav .favr-links {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #favr-dieoptiker-nav .favr-links > li {
+    position: relative;
+  }
+  #favr-dieoptiker-nav .favr-links a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #000000;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    padding-top: 43px;
+    padding-bottom: 14px;
+    margin-bottom: -14px;
+    border-bottom: 2px solid transparent;
+  }
+  #favr-dieoptiker-nav .favr-links a:hover {
+    border-bottom: 2px solid #4376c3;
+  }
+  #favr-dieoptiker-nav .favr-arrow {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #000000;
+    flex-shrink: 0;
+  }
+  #favr-dieoptiker-nav .favr-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    min-width: 220px;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    z-index: 20;
+  }
+  #favr-dieoptiker-nav li:hover .favr-submenu {
+    display: block;
+  }
+  #favr-dieoptiker-nav .favr-submenu li {
+    position: relative;
+  }
+  #favr-dieoptiker-nav .favr-submenu > li > a {
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  #favr-dieoptiker-nav .favr-submenu > li > a:hover {
+    color: #4376c3;
+    border-bottom: none;
+  }
+  /* nested sub-submenu (Über uns > Laden Innenansicht > Ladenrundgang) */
+  #favr-dieoptiker-nav .favr-subsubmenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    min-width: 200px;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    z-index: 21;
+  }
+  #favr-dieoptiker-nav .favr-submenu li:hover .favr-subsubmenu {
+    display: block;
+  }
+  #favr-dieoptiker-nav .favr-subsubmenu a {
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  #favr-dieoptiker-nav .favr-subsubmenu a:hover {
+    color: #4376c3;
+  }
+
+  /* Burger menu, hidden on desktop */
+  #favr-dieoptiker-burger-toggle {
+    display: none;
+  }
+  #favr-dieoptiker-nav .favr-burger-label {
+    display: none;
+  }
+  #favr-dieoptiker-nav .favr-mobile-panel {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
+    #favr-dieoptiker-nav .favr-inner {
+      padding: 0 20px;
+      height: 60px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    #favr-dieoptiker-nav .favr-links {
+      display: none;
+    }
+    #favr-dieoptiker-nav .favr-burger-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+    #favr-dieoptiker-nav .favr-burger-label span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: #000000;
+    }
+    #favr-dieoptiker-burger-toggle:checked ~ .favr-inner .favr-mobile-panel {
+      display: block;
+    }
+    #favr-dieoptiker-nav .favr-mobile-panel {
+      order: 3;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #eaeaea;
+    }
+    #favr-dieoptiker-nav .favr-mobile-links {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0 16px;
+    }
+    #favr-dieoptiker-nav .favr-mobile-links > li {
+      border-bottom: 1px solid #f0f0f0;
+    }
+    #favr-dieoptiker-nav .favr-mobile-links a {
+      display: block;
+      color: #000000;
+      text-decoration: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 12px 20px;
+    }
+    #favr-dieoptiker-nav .favr-mobile-sub {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 6px 30px;
+    }
+    #favr-dieoptiker-nav .favr-mobile-sub a {
+      font-size: 12px;
+      padding: 8px 0;
+      color: #444444;
+    }
+  }
+</style>
+
+<nav id="favr-dieoptiker-nav">
+  <input type="checkbox" id="favr-dieoptiker-burger-toggle">
+  <div class="favr-inner">
+
+    <ul class="favr-links">
+      <li><a href="https://www.dieoptiker.de">Willkommen</a></li>
+      <li>
+        <a href="https://www.dieoptiker.de/brillen/">Brillen <span class="favr-arrow"></span></a>
+        <ul class="favr-submenu">
+          <li><a href="https://www.dieoptiker.de/brillen/unsere-labels/">unsere Labels</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/gleitsichtbrille/">Gleitsichtbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/arbeitsplatzbrille/">Arbeitsplatzbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/kinderbrille/">Kinderbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/autofahrerbrille/">Autofahrerbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/sonnenbrille/">Sonnenbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/sportbrille/">Sportbrille</a></li>
+          <li><a href="https://www.dieoptiker.de/brillen/schiessbrille/">Schiessbrille</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.dieoptiker.de/kontaktlinsen/">Kontaktlinsen <span class="favr-arrow"></span></a>
+        <ul class="favr-submenu">
+          <li><a href="https://www.dieoptiker.de/kontaktlinsen/spezial-linsen/">Spezial-Linsen</a></li>
+          <li><a href="https://www.dieoptiker.de/kontaktlinsen/myeye2/">myeye2</a></li>
+          <li><a href="https://www.dieoptiker.de/kontaktlinsen/kontaktlinsen-nachbestellen/">Kontaktlinsen nachbestellen</a></li>
+          <li><a href="https://www.dieoptiker.de/kontaktlinsen/handhabung-infos/">Handhabung-Infos</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.dieoptiker.de/optometrie/">Optometrie <span class="favr-arrow"></span></a>
+        <ul class="favr-submenu">
+          <li><a href="https://www.dieoptiker.de/optometrie/augenglasbestimmung/">Augenglasbestimmung</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/augenfuersorge/">Augenfürsorge</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/myopiekontrolle/">Myopiekontrolle</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/winkelfehlsichtigkeit/">Winkelfehlsichtigkeit</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/trockene-augen/">trockene Augen</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/lowvision/">LowVision</a></li>
+          <li><a href="https://www.dieoptiker.de/optometrie/sehteste/">Sehteste</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.dieoptiker.de/service/">Service <span class="favr-arrow"></span></a>
+        <ul class="favr-submenu">
+          <li><a href="https://www.dieoptiker.de/service/handwerk/">Handwerk</a></li>
+          <li><a href="https://www.dieoptiker.de/service/brillen-abo/">Brillen-Abo</a></li>
+          <li><a href="https://www.dieoptiker.de/service/download/">download</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.dieoptiker.de/ueber-uns/">Über uns <span class="favr-arrow"></span></a>
+        <ul class="favr-submenu">
+          <li>
+            <a href="https://www.dieoptiker.de/ueber-uns/laden/">Laden Innenansicht ▸</a>
+            <ul class="favr-subsubmenu">
+              <li><a href="https://www.dieoptiker.de/ueber-uns/laden/ladenrundgang/">Ladenrundgang</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <label class="favr-burger-label" for="favr-dieoptiker-burger-toggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </label>
+
+    <div class="favr-mobile-panel">
+      <ul class="favr-mobile-links">
+        <li><a href="https://www.dieoptiker.de">Willkommen</a></li>
+        <li>
+          <a href="https://www.dieoptiker.de/brillen/">Brillen</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://www.dieoptiker.de/brillen/unsere-labels/">unsere Labels</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/gleitsichtbrille/">Gleitsichtbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/arbeitsplatzbrille/">Arbeitsplatzbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/kinderbrille/">Kinderbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/autofahrerbrille/">Autofahrerbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/sonnenbrille/">Sonnenbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/sportbrille/">Sportbrille</a></li>
+            <li><a href="https://www.dieoptiker.de/brillen/schiessbrille/">Schiessbrille</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.dieoptiker.de/kontaktlinsen/">Kontaktlinsen</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://www.dieoptiker.de/kontaktlinsen/spezial-linsen/">Spezial-Linsen</a></li>
+            <li><a href="https://www.dieoptiker.de/kontaktlinsen/myeye2/">myeye2</a></li>
+            <li><a href="https://www.dieoptiker.de/kontaktlinsen/kontaktlinsen-nachbestellen/">Kontaktlinsen nachbestellen</a></li>
+            <li><a href="https://www.dieoptiker.de/kontaktlinsen/handhabung-infos/">Handhabung-Infos</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.dieoptiker.de/optometrie/">Optometrie</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://www.dieoptiker.de/optometrie/augenglasbestimmung/">Augenglasbestimmung</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/augenfuersorge/">Augenfürsorge</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/myopiekontrolle/">Myopiekontrolle</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/winkelfehlsichtigkeit/">Winkelfehlsichtigkeit</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/trockene-augen/">trockene Augen</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/lowvision/">LowVision</a></li>
+            <li><a href="https://www.dieoptiker.de/optometrie/sehteste/">Sehteste</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.dieoptiker.de/service/">Service</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://www.dieoptiker.de/service/handwerk/">Handwerk</a></li>
+            <li><a href="https://www.dieoptiker.de/service/brillen-abo/">Brillen-Abo</a></li>
+            <li><a href="https://www.dieoptiker.de/service/download/">download</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://www.dieoptiker.de/ueber-uns/">Über uns</a>
+          <ul class="favr-mobile-sub">
+            <li><a href="https://www.dieoptiker.de/ueber-uns/laden/">Laden Innenansicht</a></li>
+            <li><a href="https://www.dieoptiker.de/ueber-uns/laden/ladenrundgang/">Ladenrundgang</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
