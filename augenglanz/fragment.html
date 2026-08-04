@@ -1,0 +1,162 @@
+<style>
+  #favr-augenglanz-nav {
+    box-sizing: border-box;
+    width: 100%;
+    background: #ffffff;
+    font-family: Calibri, system-ui, sans-serif;
+  }
+  #favr-augenglanz-nav * {
+    box-sizing: border-box;
+  }
+  #favr-augenglanz-nav .favr-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 145px 0 210px;
+  }
+  #favr-augenglanz-nav .favr-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  #favr-augenglanz-nav .favr-logo svg {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  #favr-augenglanz-nav .favr-logo-text {
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #484848;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  #favr-augenglanz-nav .favr-logo-text:hover {
+    color: #970048;
+  }
+  #favr-augenglanz-nav .favr-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #favr-augenglanz-nav .favr-links a {
+    display: block;
+    color: #484848;
+    text-decoration: none;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  #favr-augenglanz-nav .favr-links a:hover {
+    color: #970048;
+  }
+
+  /* Burger menu, hidden on desktop */
+  #favr-augenglanz-burger-toggle {
+    display: none;
+  }
+  #favr-augenglanz-nav .favr-burger-label {
+    display: none;
+  }
+  #favr-augenglanz-nav .favr-mobile-panel {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    #favr-augenglanz-nav .favr-inner {
+      padding: 0 20px;
+    }
+    #favr-augenglanz-nav .favr-links {
+      display: none;
+    }
+    #favr-augenglanz-nav .favr-burger-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+    #favr-augenglanz-nav .favr-burger-label span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #484848;
+    }
+    #favr-augenglanz-burger-toggle:checked ~ .favr-inner .favr-mobile-panel {
+      display: block;
+    }
+    #favr-augenglanz-nav .favr-inner {
+      flex-wrap: wrap;
+      height: auto;
+      min-height: 50px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    #favr-augenglanz-nav .favr-mobile-panel {
+      order: 3;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #eeeeee;
+      margin-top: 10px;
+    }
+    #favr-augenglanz-nav .favr-mobile-links {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0 14px;
+    }
+    #favr-augenglanz-nav .favr-mobile-links > li {
+      border-bottom: 1px solid #f4f4f4;
+    }
+    #favr-augenglanz-nav .favr-mobile-links a {
+      display: block;
+      color: #484848;
+      text-decoration: none;
+      font-family: Calibri, system-ui, sans-serif;
+      font-size: 16px;
+      padding: 12px 4px;
+    }
+  }
+</style>
+
+<nav id="favr-augenglanz-nav">
+  <input type="checkbox" id="favr-augenglanz-burger-toggle">
+  <div class="favr-inner">
+    <ul class="favr-links">
+      <li><a href="https://augenglanz-berlin.de/" class="favr-logo-text">augenglanz</a></li>
+      <li><a href="https://augenglanz-berlin.de/marken">Marken</a></li>
+      <li><a href="https://augenglanz-berlin.de/termine">Termine</a></li>
+      <li><a href="https://www.favrspecs.com/de/optiker/in/berlin/203/augenglanz/11798/pro/optische-brillen/">Anprobe</a></li>
+      <li><a href="https://augenglanz-berlin.de/linsen">Linsen</a></li>
+      <li><a href="https://www.augenglanz-berlin.de/ueber-uns">Über uns</a></li>
+      <li><a href="https://augenglanz-berlin.de/kontakt">Kontakt</a></li>
+    </ul>
+
+    <label class="favr-burger-label" for="favr-augenglanz-burger-toggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </label>
+
+    <div class="favr-mobile-panel">
+      <ul class="favr-mobile-links">
+        <li><a href="https://augenglanz-berlin.de/">augenglanz</a></li>
+        <li><a href="https://augenglanz-berlin.de/marken">Marken</a></li>
+        <li><a href="https://augenglanz-berlin.de/termine">Termine</a></li>
+        <li><a href="https://www.favrspecs.com/de/optiker/in/berlin/203/augenglanz/11798/pro/optische-brillen/">Anprobe</a></li>
+        <li><a href="https://augenglanz-berlin.de/linsen">Linsen</a></li>
+        <li><a href="https://www.augenglanz-berlin.de/ueber-uns">Über uns</a></li>
+        <li><a href="https://augenglanz-berlin.de/kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
