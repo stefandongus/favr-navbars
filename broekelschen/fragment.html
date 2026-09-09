@@ -1,0 +1,107 @@
+<style>
+  #favr-broekelschen-nav {
+    box-sizing: border-box;
+    width: 100%;
+    background: #ffffff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  #favr-broekelschen-nav * {
+    box-sizing: border-box;
+  }
+  #favr-broekelschen-nav .favr-bar {
+    display: flex;
+    align-items: center;
+    height: 130px;
+    padding: 0 40px;
+    position: relative;
+  }
+
+  #favr-broekelschen-burger-toggle {
+    display: none;
+  }
+  #favr-broekelschen-nav .favr-burger-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #favr-broekelschen-nav .favr-burger-label span {
+    display: block;
+    width: 58px;
+    height: 5px;
+    background: #000000;
+    margin: 6px 0;
+  }
+
+  #favr-broekelschen-nav .favr-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 40px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    min-width: 240px;
+    padding: 10px 0;
+    z-index: 30;
+  }
+  #favr-broekelschen-burger-toggle:checked ~ .favr-bar .favr-dropdown {
+    display: block;
+  }
+  #favr-broekelschen-nav .favr-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #favr-broekelschen-nav .favr-dropdown a {
+    display: block;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 12px 24px;
+    white-space: nowrap;
+  }
+  #favr-broekelschen-nav .favr-dropdown a:hover {
+    background: #f4f4f4;
+  }
+
+  @media (max-width: 600px) {
+    #favr-broekelschen-nav .favr-bar {
+      height: 90px;
+      padding: 0 24px;
+    }
+    #favr-broekelschen-nav .favr-dropdown {
+      left: 24px;
+      right: 24px;
+      min-width: 0;
+    }
+  }
+</style>
+
+<nav id="favr-broekelschen-nav">
+  <input type="checkbox" id="favr-broekelschen-burger-toggle">
+  <div class="favr-bar">
+    <label class="favr-burger-label" for="favr-broekelschen-burger-toggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </label>
+
+    <div class="favr-dropdown">
+      <ul>
+        <li><a href="https://optiker-broekelschen.de/Willkommen/">Willkommen</a></li>
+        <li><a href="https://optiker-broekelschen.de/Team/">Team</a></li>
+        <li><a href="https://optiker-broekelschen.de/Kollektionen/">Kollektionen</a></li>
+        <li><a href="https://optiker-broekelschen.de/Sonnenbrillen/">Sonnenbrillen</a></li>
+        <li><a href="https://optiker-broekelschen.de/Kids/">Kids</a></li>
+        <li><a href="https://optiker-broekelschen.de/Myopie-Management/">Myopie Management</a></li>
+        <li><a href="https://optiker-broekelschen.de/Brillenglaeser/">Brillengläser</a></li>
+        <li><a href="https://optiker-broekelschen.de/Sehtest/">Sehtest</a></li>
+        <li><a href="https://optiker-broekelschen.de/Screening/">Screening</a></li>
+        <li><a href="https://optiker-broekelschen.de/Anfahrt/">Anfahrt</a></li>
+        <li><a href="https://optiker-broekelschen.de/Kontakt/">Kontakt</a></li>
+        <li><a href="https://optiker-broekelschen.de/Impressum/">Impressum</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
