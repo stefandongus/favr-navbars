@@ -1,0 +1,106 @@
+<nav id="favr-maier-nav">
+  <style>
+    #favr-maier-nav { font-family: Arial, Helvetica, sans-serif; background:#F0EBE3; width:100%; }
+    #favr-maier-nav * { box-sizing: border-box; }
+    #favr-maier-nav a { text-decoration:none; color:inherit; }
+    #favr-maier-nav .favr-inner {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      height:200px;
+      padding:0 60px 0 60px;
+      position:relative;
+    }
+    #favr-maier-nav .favr-logo {
+      display:flex;
+      align-items:flex-start;
+      flex-shrink:0;
+      padding-top:75px;
+      padding-right:86px;
+    }
+    #favr-maier-nav .favr-logo svg { display:block; height:50px; width:auto; }
+
+    /* burger */
+    #favr-maier-burger-toggle { display:none; }
+    #favr-maier-nav .favr-burger-wrap {
+      display:flex;
+      align-items:center;
+      align-self:center;
+      flex-shrink:0;
+    }
+    #favr-maier-nav .favr-burger-label {
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      width:32px;
+      height:32px;
+      cursor:pointer;
+    }
+    #favr-maier-nav .favr-burger-label span {
+      display:block;
+      width:28px;
+      height:2px;
+      background:#1D1D1B;
+      margin:3px 0;
+    }
+
+    #favr-maier-nav .favr-dropdown {
+      display:none;
+      position:absolute;
+      top:100%;
+      right:60px;
+      background:#ffffff;
+      border:1px solid #e5e0d8;
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+      min-width:260px;
+      padding:14px 0;
+      z-index:30;
+    }
+    #favr-maier-nav .favr-dropdown a {
+      display:block;
+      padding:12px 26px;
+      font-size:15px;
+      color:#1D1D1B;
+      white-space:nowrap;
+    }
+    #favr-maier-nav .favr-dropdown a:hover {
+      background:#F0EBE3;
+      color:#CA972A;
+    }
+    #favr-maier-burger-toggle:checked ~ .favr-inner .favr-dropdown {
+      display:block;
+    }
+
+    @media (max-width: 900px) {
+      html { scroll-padding-top:120px; }
+      #favr-maier-nav .favr-inner { height:120px; padding:0 24px; }
+      #favr-maier-nav .favr-logo { padding-top:40px; padding-right:0; }
+      #favr-maier-nav .favr-logo svg { height:32px; }
+      #favr-maier-nav .favr-dropdown { right:24px; }
+    }
+  </style>
+
+  <input type="checkbox" id="favr-maier-burger-toggle">
+
+  <div class="favr-inner">
+    <a href="https://www.augenoptik-maier.de/" class="favr-logo" aria-label="Augenoptik Maier">
+      <svg width="210" height="55" viewBox="0 0 210 55" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2_11_maier)"><path fill-rule="evenodd" clip-rule="evenodd" d="M197.951 41.397l-3.664 3.336-4.574-5.621-12.108-15.207.029-.292c.742-.216 1.729-.686 2.961-1.41a15.306 15.306 0 003.108-2.348 10.5 10.5 0 001.896-2.72c.539-1.08.808-2.527.807-4.34 0-1.664-.396-3.095-1.188-4.293a6.922 6.922 0 00-3.275-2.639 11.489 11.489 0 00-3.574-.86 44.867 44.867 0 00-3.459-.145l-1.605.016-.821.016-.073 10.852-.015 6.64.044 12.05.073 9.555h-4.837l.089-7.53.058-13.913v-5.992L167.677.616l2.932-.066 4.867-.064a37.048 37.048 0 014.96.324c1.626.222 3.208.692 4.692 1.393a10.814 10.814 0 014.603 4c1.133 1.76 1.699 3.827 1.699 6.203 0 3.067-.855 5.62-2.565 7.66-1.709 2.041-3.327 3.558-4.852 4.55v.163a243.016 243.016 0 008.81 10.689M156.349 43.923l-3.9-.032-8.999-.033-6.816.033-5.234.032.103-8.13.044-12.924-.029-9.685L131.4.712l5.205.033 6.435.033 9.116-.033 3.812-.033v4.503l-3.679-.05-8.429-.047-4.31.016-3.342.016-.058 7.304-.059 6.883 3.122.016 3.21.018 9.221-.05 4.324-.048v4.47l-4.837-.048-8.415-.048-3.357.016-3.268.016.029 9.717.059 6.024 4.193.05 5.305.016 7.344-.033 3.328-.033" fill="#1D1D1B"/><path fill-rule="evenodd" clip-rule="evenodd" d="M117.679 43.987h-4.836l.087-6.93.059-14.318-.029-9.685-.117-12.438h4.836l-.102 10.77-.044 10.024.058 15.24" fill="#CA972A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M92.995 24.39l-3.342-8.26-3.694-9.005h-.118l-3.61 8.763-3.485 8.503.03.032h14.19l.03-.032zm12.606 17.88l-4.573 2.591-1.833-4.825-4.522-11.5H77.134l-4.75 11.694-1.847 4.631-3.928-2.334 6.284-14.848L84.376-.001h3.81l11.526 28.115L105.6 42.27zM63.501 43.34l-4.779 1.037L52.684 8h-.059l-5.072 12.18-7.652 19.176h-4.045l-7.712-19.257L23.19 8.033h-.058l-2.375 12.39-4.193 23.888-4.514-.905 5.483-27.663L20.317.875 24.98.13l4.149 10.43L38.2 32.876h.177l8.444-21.119L51.453.13l4.426.388 2.433 14.203" fill="#1D1D1B"/><path d="M75.515 52.652H0v.525h75.515v-.525zM210 52.652h-75.617v.525H210v-.525z" fill="#CA972A"/><path fill-rule="evenodd" clip-rule="evenodd" d="M131.502 54.067l-.39.372-1.558-1.459-.859-.778v-.014l.898-.922 1.373-1.46.382.342-1.193 1.188-.77.794.668.617 1.449 1.32zm-2.931.31h-.559l.012-.892V50.91l-.012-1.058h.559l-.01 1.167v2.627l.01.732zm-3.179 0h-.563l.01-.729v-2.504l-.013-1.298h.557l-.011 1.124v2.636l.02.772zm-2.425-4.048h-1.658l-.011 1.052v2.186l.009.815h-.563l.012-.829v-2.157l-.011-1.067H119.085v-.467H122.956l.011.467zm-5.238 1.068a1.4 1.4 0 01-.32.892c-.218.269-.518.46-.855.54a3.04 3.04 0 01-.502.088c-.201.02-.403.03-.605.028v1.43h-.557l.01-.752.009-1.689v-.896l-.014-1.178h.52c.333-.005.666.02.995.074.243.038.476.122.687.25.199.121.361.294.47.501.111.222.167.467.162.715v-.003zm-5.674.77c0-.294-.049-.586-.146-.863a1.751 1.751 0 00-.448-.712 1.402 1.402 0 00-1.017-.411 1.463 1.463 0 00-.566.109 1.483 1.483 0 00-.475.322 1.86 1.86 0 00-.42.67 2.46 2.46 0 000 1.704c.096.247.246.47.437.652a1.467 1.467 0 001.583.3 1.52 1.52 0 00.476-.316c.178-.177.32-.388.416-.62.109-.264.163-.547.16-.832v-.003zm.584-.054a2.66 2.66 0 01-.187 1.006c-.11.282-.277.539-.489.755a2.054 2.054 0 01-1.514.632 2.16 2.16 0 01-.791-.146 2.01 2.01 0 01-.669-.427 2.28 2.28 0 01-.53-.776 2.624 2.624 0 01-.201-1.054c-.004-.323.05-.644.159-.948a2.3 2.3 0 01.477-.769c.196-.211.434-.379.7-.492a2.226 2.226 0 011.699-.01c.253.105.482.26.673.455.222.227.394.499.502.797.113.314.169.646.165.98l.006-.003zm-6.629-2.26l-.012 1.212v.984l.007 1.526v.603l-.451.22-1.908-2.49-1.021-1.283.012 2.227.014 1.523h-.528l.012-.601v-2.42l-.015-1.292.515-.243 1.036 1.313 1.837 2.299h.007l-.013-1.75-.015-1.827.523-.002zm-6.239 4.522h-2.875l.012-.848v-2.359l-.013-1.301H99.725v.462H97.452l-.007.762v.719h2.29v.467H97.443v1.643h2.325l.003.455zm-5.333-2.319l-.015.57v1.77l-.203.015a5.294 5.294 0 01-.334.012 5.29 5.29 0 01-1.422-.172c-.4-.11-.768-.317-1.07-.603a1.964 1.964 0 01-.45-.653 2.202 2.202 0 01-.17-.892 1.927 1.927 0 01.325-1.1c.228-.332.536-.601.897-.782a3.39 3.39 0 01.884-.306c.34-.07.686-.105 1.033-.104H94.2l.04.486h-.251a4.737 4.737 0 00-.946.088c-.261.05-.514.136-.751.256-.28.144-.516.36-.684.626a1.563 1.563 0 00-.248.842c-.013.331.077.658.258.935.17.247.4.448.668.584.243.124.503.212.772.262.277.05.558.076.84.076v-.526l-.014-1.38.554-.004zm-5.928-2.2v2.94c.005.236-.035.47-.116.692a1.416 1.416 0 01-.355.522 1.684 1.684 0 01-.583.35 2.309 2.309 0 01-.798.127 2.344 2.344 0 01-.798-.126 1.668 1.668 0 01-.584-.351 1.428 1.428 0 01-.353-.522 1.896 1.896 0 01-.117-.692V50.93l-.007-1.073h.559l-.009.577v2.33c0 .413.118.726.355.938.268.224.61.338.96.32.437 0 .764-.102.983-.304.219-.203.328-.521.328-.954v-2.908l.535.002zm-7.002 2.48l-.385-.862-.426-.94h-.015l-.416.916-.4.887h1.642zm1.459 1.867l-.527.27-.211-.504-.523-1.2h-2.03l-.547 1.22-.213.485-.454-.244.73-1.55 1.324-2.888h.438l1.327 2.934.686 1.477zm32.489-3.404l-.008.744v.974h.136c.161 0 .322-.01.481-.03.151-.016.299-.053.438-.113a1.09 1.09 0 00.486-.374c.116-.179.174-.389.166-.601a1.063 1.063 0 00-.159-.594 1.047 1.047 0 00-.486-.387 1.436 1.436 0 00-.437-.11 4.82 4.82 0 00-.486-.023h-.126l-.005.514z" fill="#CA972A"/></g><defs><clipPath id="clip0_2_11_maier"><path fill="white" d="M0 0h210v54.51H0z"/></clipPath></defs></svg>
+    </a>
+
+    <div class="favr-burger-wrap">
+      <label for="favr-maier-burger-toggle" class="favr-burger-label" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </label>
+    </div>
+
+    <div class="favr-dropdown">
+      <a href="https://www.augenoptik-maier.de/">Startseite</a>
+      <a href="https://www.augenoptik-maier.de/manufaktur/">Manufaktur</a>
+      <a href="https://www.augenoptik-maier.de/kontaktlinsen/">Kontaktlinsen</a>
+      <a href="https://www.augenoptik-maier.de/marken/">Marken</a>
+      <a href="https://www.augenoptik-maier.de/terminbuchung/">Terminbuchung</a>
+      <a href="https://www.favrspecs.com/de/optiker/in/landshut/464/maier-feine-augenoptik/10550/pro/optische-brillen/">Try on</a>
+    </div>
+  </div>
+</nav>
